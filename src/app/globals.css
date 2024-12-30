@@ -3,9 +3,10 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  --primary-color:#111827;
+  --secondary-color:#e5e7eb;
+ 
+ }
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -19,3 +20,23 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.navbarMobile{
+position:fixed;
+right:0px;
+top:0px;
+bottom: 0px;
+display: flex;
+flex-direction: column;
+border: 2px solid blue;
+color: aqua;
+
+}
+
+.fixedHeader{
+  position:fixed;
+  top:0px;
+  left:0px;
+  right:0px;
+}
+
