@@ -12,7 +12,7 @@ import { ToggelHeaderContext } from "@/app/util/hooks/toggelHeaderContext"
 
 function Categories({ categories,subCategories }:{categories:typeCategorie[],subCategories:[string,typeSubCategorie[]][]}) {
 
- 
+
 
 
 const [showList,setShowList]=useState<boolean>(true)
@@ -22,6 +22,14 @@ if(!context){
 
     throw new Error("ToggelHeaderContext must be used within a HeaderContextProvider")
 }
+
+ if (!categories){
+    return ;
+ }
+if(!subCategories){
+    return;
+}
+
 const {titleCat,setTitleCat,setToggelSub,toggelSub}=context
 console.log('*************************************************')
 console.log(categories)
