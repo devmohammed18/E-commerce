@@ -23,12 +23,9 @@ if(!context){
     throw new Error("ToggelHeaderContext must be used within a HeaderContextProvider")
 }
 
- if (!categories){
-    return ;
- }
-if(!subCategories){
-    return;
-}
+if (!categories || !subCategories) {
+    return <div>Categories or SubCategories data is missing.</div>;
+  }
 
 const {titleCat,setTitleCat,setToggelSub,toggelSub}=context
 console.log('*************************************************')
