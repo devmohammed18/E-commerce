@@ -7,19 +7,31 @@ import Link from "next/link"
 type typeParamsCatSub=Promise<{categorie:typeCategorie,subcategorie:typeSubCategorie}>
 
 const getProducts=async(categorie:typeCategorie,subcategorie:typeSubCategorie)=>{
-                                                                
-  const res=await fetch
-    (`${process.env.NEXT_PUBLIC_API_URL}/products?populate[images][populate]=*&filters[categories][title_cat][$eq]=${categorie}&filters[subcategories][title_sub][$eq]=${subcategorie}`,
-      {headers:{
-        Authorization:`Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`
-      }
+ 
+    try{
+         console.log('categorie>>>>>>Avant fetch ',categorie,'subcategorie>>>>>>Avant fetch ',subcategorie)
+        const res=await fetch
+        (`${process.env.NEXT_PUBLIC_API_URL}/products?populate[images][populate]=*&filters[categories][title_cat][$eq]=${categorie}&filters[subcategories][title_sub][$eq]=${subcategorie}`,
+          {headers:{
+            Authorization:`Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`
+          }
+    
+        })
+    
+        if(!res.ok){
+            throw new Error(`Http sattus : ${res.status}`)
+        }
+        console.log('categorie>>>>>>Apres fetch ',categorie,'subcategorie>>>>>>Apres fetch ',subcategorie)
+         const data=await res.json()
+         const products:typeProduct[]=data.data
+    
+       return products
 
-    })
+    }catch(error){
+     console.log(error)
+    }
 
-     const data=await res.json()
-     const products:typeProduct[]=data.data
-
-   return products
+ 
    
 
 }
