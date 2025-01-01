@@ -67,7 +67,7 @@ async function Products({params,}:{params:typeParamsCatSub}) {
         <Link href={`/productdetails/${id} `} className=" sm:w-full block rounded-lg p-4 shadow-sm shadow-indigo-100 border hover:shadow-md hover:border hover:border-solid hover:border-indigo-300 hover:rounded-lg ">
             {/* ********************   big image Cart Product ******************** */}
             <div className='w-full h-72 box-border'> 
-            <h1>url_Image :{images[0]?.url_image[0]?.url}</h1>
+            
 
             {/* <Image
                             alt="image"
@@ -90,6 +90,7 @@ async function Products({params,}:{params:typeParamsCatSub}) {
                          </div>)} 
 
             </div>
+            <h1>url_Image :{images[0]?.url_image[0]?.url}</h1>
             {/************************Details Cart Product **************************/}
             <div className="mt-2">
             
