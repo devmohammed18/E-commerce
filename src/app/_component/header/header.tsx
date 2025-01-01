@@ -44,7 +44,8 @@ useEffect(()=>{
                   
                   <div  className=" sm:gap-5 flex justify-between items-center  gap-14 border-0 border-solid border-red-800 cursor-pointer" >
                     
-                      <button onClick={()=>{setToggelNav(true);setToggelSub(true)}} className="hidden sm:block md:block cursor-pointer text-2xl" >
+                      <button onClick={()=>{setToggelNav(true);setToggelSub(true)}} 
+                           className="hidden sm:block md:block cursor-pointer text-2xl" >
                         <IoMenuSharp />
                       </button>
                       

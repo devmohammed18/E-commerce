@@ -31,7 +31,7 @@ function NavBar({categories,subCategories}:{categories:typeCategorie[],subCatego
         <div className="sm:w-full sm:flex-col sm:items-start sm:justify-center sm:mt-20 sm:px-4
                         md:w-full md:flex-col md:items-start md:justify-center md:mt-20 md:px-14  flex  justify-center items-center gap-3 " >
          
-                <Link onClick={()=>{setToggelNav(false)} } onMouseMove={()=>setToggelSub(true)}
+                <Link onClick={()=>{setToggelNav(false)} } 
                      className='sm:w-full sm:py-2 sm:border-b sm:border-solid sm:border-b-[var(--secondary-color)] 
                       md:w-full md:py-2 md:border-b md:border-solid md:border-b-[var(--secondary-color)]'  href='/'>
                       home
