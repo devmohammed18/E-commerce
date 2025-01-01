@@ -68,13 +68,13 @@ async function Products({params,}:{params:typeParamsCatSub}) {
             <div className='w-full h-72 box-border'> 
             
 
-            <Image
+            {/* <Image
                             alt="image"
                             src={`/image/AIR+MAX+PLUS00.png`} width={1000} height={1000}
                             className=" sm:w-80 sm:h-full  h-72 w-full rounded-md object-cover"
-                            />
+                            /> */}
 
-                 {images && images.length>0 && images[0].url_image[0].url ?
+                 {images[0]?.url_image[0]?.url ?
                    
                     
                     (<Image
@@ -84,10 +84,9 @@ async function Products({params,}:{params:typeParamsCatSub}) {
                             />)
 
 
-                     : (<div className="w-full h-80 bg-gray-200 " >
-                         <span>Image Available</span>
-                         
-                     </div>)} 
+                     : ( <div className="w-full h-80 bg-gray-200 " >
+                              <span>Image Available</span>
+                         </div>)} 
 
             </div>
             {/************************Details Cart Product **************************/}
