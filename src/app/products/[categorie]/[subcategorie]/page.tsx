@@ -52,25 +52,36 @@ async function Products({params,}:{params:typeParamsCatSub}) {
         {/* <h1>Product{categorie}</h1> */}
          
         {/* //    {/*************************************** cards The products **************************/}
-    {products && products.map(({id,title_pro,images},index:number)=>(
+    {products && products.map(({id,title_pro},index:number)=>(
       
     <div className='w-72 h-full border-0 border-solid border-red-900'  key={index}>
 
         <Link href={`/productdetails/${id} `} className=" sm:w-full block rounded-lg p-4 shadow-sm shadow-indigo-100 border hover:shadow-md hover:border hover:border-solid hover:border-indigo-300 hover:rounded-lg ">
             {/* ********************   big image Cart Product ******************** */}
             <div className='w-full h-72 box-border'> 
-                 {images && images.length>0 && images[0]?.url_image[0]?.url ?
+            
+
+            <Image
+                            alt="image"
+                            src={`/image/AIR+MAX+PLUS00.png`} width={1000} height={1000}
+                            className=" sm:w-80 sm:h-full  h-72 w-full rounded-md object-cover"
+                            />
+
+                 {/* {images && images.length>0 && images[0]?.url_image[0]?.url ?
+                   
+                    
                     (<Image
-                            alt=""
-                            src={images[0]?.url_image[0].url} width={1000} height={1000}
+                            alt="image"
+                            src={images[0]?.url_image[0].url || "image/AIR+MAX+PLUS00.png"} width={1000} height={1000}
                             className=" sm:w-80 sm:h-full  h-72 w-full rounded-md object-cover"
                             />)
                     : (<div className="w-full h-80 bg-gray-200 " >
                          <span>Image Available</span>
+                         
                      </div>)
                             
                             
-                            }
+                            } */}
 
             </div>
             {/************************Details Cart Product **************************/}
