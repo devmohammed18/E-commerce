@@ -1,7 +1,7 @@
 
 import { typeCategorie, typeProduct, typeSubCategorie } from "@/app/util/type/type"
 import React from "react"
-import Image from "next/image"
+//import Image from "next/image"
 import Link from "next/link"
 
 type typeParamsCatSub=Promise<{categorie:typeCategorie,subcategorie:typeSubCategorie}>
@@ -52,18 +52,19 @@ async function Products({params,}:{params:typeParamsCatSub}) {
         {/* <h1>Product{categorie}</h1> */}
          
         {/* //    {/*************************************** cards The products **************************/}
-    {products && products.map(({id,title_pro,images},index:number)=>(
+    {products && products.map(({id,title_pro},index:number)=>(
       
     <div className='w-72 h-full border-0 border-solid border-red-900'  key={index}>
 
         <Link href={`/productdetails/${id} `} className=" sm:w-full block rounded-lg p-4 shadow-sm shadow-indigo-100 border hover:shadow-md hover:border hover:border-solid hover:border-indigo-300 hover:rounded-lg ">
             {/* ********************   big image Cart Product ******************** */}
             <div className='w-full h-72 box-border'> 
-                    <Image
+
+                    {/* <Image
                             alt=""
                             src={images[0]?.url_image[0].url} width={1000} height={1000}
                             className=" sm:w-80 sm:h-full  h-72 w-full rounded-md object-cover"
-                            />
+                            /> */}
 
             </div>
             {/************************Details Cart Product **************************/}
@@ -72,7 +73,7 @@ async function Products({params,}:{params:typeParamsCatSub}) {
                 <dl>
                     <div>
                         <dt className="sr-only">Price</dt>
-                        <dd className="text-sm text-gray-500">${images[0].price}</dd>
+                        {/* <dd className="text-sm text-gray-500">${images[0].price}</dd> */}
                     </div>
 
                     <div>
@@ -84,7 +85,7 @@ async function Products({params,}:{params:typeParamsCatSub}) {
                 <div className=" mt-3 flex items-center gap-2 text-xs">
                     
                     
-                    {images.map(({url_image},index:number)=>(
+                    {/* {images.map(({url_image},index:number)=>(
                         <div
                         //  onClick={()=>setIdImage(index)} 
                          
@@ -96,7 +97,7 @@ async function Products({params,}:{params:typeParamsCatSub}) {
                             className="h-full w-full rounded-md object-cover"
                             />
                         </div>
-                    ))}   
+                    ))}    */}
                 </div>
               
             </div>
