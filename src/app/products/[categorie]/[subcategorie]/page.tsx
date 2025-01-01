@@ -45,7 +45,14 @@ async function Products({params,}:{params:typeParamsCatSub}) {
     console.log(subcategorie)
     console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
     const products=await getProducts(categorie,subcategorie);
-    
+   
+    products?.map(({images})=>(
+     images && images.length && images[0].url_image[0].url?
+     console.log("images[0].url_image[0].url",images[0].url_image[0].url)
+     :console.log("images is Available")
+
+    ))
+
   return (
     <div className='w-full min-h-screen mt-[60px] mb-1 p-6 flex flex-wrap justify-around gap-y-5 items-center bg-white border border-solid border-black  '>
       
@@ -67,20 +74,20 @@ async function Products({params,}:{params:typeParamsCatSub}) {
                             className=" sm:w-80 sm:h-full  h-72 w-full rounded-md object-cover"
                             />
 
-                 {/* {images && images.length>0 && images[0]?.url_image[0]?.url ? */}
+                 {images && images.length>0 && images[0].url_image[0].url ?
                    
                     
                     (<Image
                             alt="image"
-                            src={images[0]?.url_image[0]?.url || `/image/AIR+MAX+PLUS00.png`} width={1000} height={1000}
+                            src={images[0].url_image[0].url} width={1000} height={1000}
                             className=" sm:w-80 sm:h-full  h-72 w-full rounded-md object-cover"
                             />)
 
 
-                    {/* : (<div className="w-full h-80 bg-gray-200 " >
+                     : (<div className="w-full h-80 bg-gray-200 " >
                          <span>Image Available</span>
                          
-                     </div>)} */}
+                     </div>)} 
 
             </div>
             {/************************Details Cart Product **************************/}
