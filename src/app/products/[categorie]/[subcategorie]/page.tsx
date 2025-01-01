@@ -60,7 +60,7 @@ async function Products({params,}:{params:typeParamsCatSub}) {
         {/* <h1>Product{categorie}</h1> */}
          
         {/* //    {/*************************************** cards The products **************************/}
-    {products && products.map(({id,title_pro,images},index:number)=>(
+    {products && products.map(({id,title_pro,images}:typeProduct,index:number)=>(
       
     <div className='w-72 h-full border-0 border-solid border-red-900'  key={index}>
           
