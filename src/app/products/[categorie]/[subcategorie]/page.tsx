@@ -46,14 +46,7 @@ async function Products({params,}:{params:typeParamsCatSub}) {
     console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
   
     const products=await getProducts(categorie,subcategorie);
-    products?.map(({images})=>(
-        images && images.length && images[0].url_image[0].url?
-        console.log("images[0].url_image[0].url",images[0].url_image[0].url)
-        :console.log("images is Available")
-   
-       ))
-  
-
+    
   return (
     <div className='w-full min-h-screen mt-[60px] mb-1 p-6 flex flex-wrap justify-around gap-y-5 items-center bg-white border border-solid border-black  '>
       
@@ -62,6 +55,7 @@ async function Products({params,}:{params:typeParamsCatSub}) {
         {/* //    {/*************************************** cards The products **************************/}
     {products && products.map(({id,title_pro,images}:typeProduct,index:number)=>(
       
+
     <div className='w-72 h-full border-0 border-solid border-red-900'  key={index}>
           
         <Link href={`/productdetails/${id} `} className=" sm:w-full block rounded-lg p-4 shadow-sm shadow-indigo-100 border hover:shadow-md hover:border hover:border-solid hover:border-indigo-300 hover:rounded-lg ">
@@ -69,11 +63,7 @@ async function Products({params,}:{params:typeParamsCatSub}) {
             <div className='w-full h-72 box-border'> 
             
 
-            {/* <Image
-                            alt="image"
-                            src={`/image/AIR+MAX+PLUS00.png`} width={1000} height={1000}
-                            className=" sm:w-80 sm:h-full  h-72 w-full rounded-md object-cover"
-                            /> */}
+           
                 
                  {images && images.length>0 && images[0]?.url_image[0]?.url ?
                    
@@ -90,7 +80,7 @@ async function Products({params,}:{params:typeParamsCatSub}) {
                          </div>)} 
 
             </div>
-            <h1>url_Image :{images[0]?.url_image[0]?.url}</h1>
+            
             {/************************Details Cart Product **************************/}
             <div className="mt-2">
             
@@ -109,7 +99,7 @@ async function Products({params,}:{params:typeParamsCatSub}) {
                 <div className=" mt-3 flex items-center gap-2 text-xs">
                     
                     
-                    {/* {images.map(({url_image},index:number)=>(
+                    {images.map(({url_image},index:number)=>(
                         <div
                         //  onClick={()=>setIdImage(index)} 
                          
@@ -121,7 +111,7 @@ async function Products({params,}:{params:typeParamsCatSub}) {
                             className="h-full w-full rounded-md object-cover"
                             />
                         </div>
-                    ))}    */}
+                    ))}   
                 </div>
               
             </div>
