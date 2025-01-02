@@ -3,8 +3,8 @@ import { typeProduct } from '@/app/util/type/type'
 import React, { useEffect } from 'react'
 import Image from 'next/image'
 import { useState } from 'react'
-// import { useDispatch } from 'react-redux'
-// import { addCart } from '@/app/redux/cartreducer'
+import { useDispatch } from 'react-redux'
+import { addCart } from '@/app/util/redux/reduce'
 function BodyProductDetails({productdetails}:{productdetails:typeProduct} ) {
   
   const [indexPositionImage,setIndexPositionImage]=useState(0) //select la position de product
@@ -12,7 +12,7 @@ function BodyProductDetails({productdetails}:{productdetails:typeProduct} ) {
   const [selectColorImage,setSelectImage]=useState<number |null >(null)
   const [indexSize,setIndextSize]=useState<number |null >(null);// selected size 
   const [selectSize,setSelectSize]=useState<string>('')
-//   const dispatch=useDispatch();  
+  const dispatch=useDispatch();  
   
   // retrieve all sizes the product this Color
 
@@ -70,16 +70,16 @@ function BodyProductDetails({productdetails}:{productdetails:typeProduct} ) {
     
    //add product in the panie
 
-//     dispatch(addCart({
-//      id:copieProductdetail.id,
-//      title_pro:copieProductdetail.title_pro,
-//      desc_pro:copieProductdetail.desc_pro,
-//      priceCart:copieProductdetail.priceCart,
-//      images:selectedColorImage,
-//      quantityCart:1,
-//      sizeCart:selectedSize[0].name_size,
+    dispatch(addCart({
+     id:copieProductdetail.id,
+     title_pro:copieProductdetail.title_pro,
+     desc_pro:copieProductdetail.desc_pro,
+     priceCart:copieProductdetail.priceCart,
+     images:selectedColorImage,
+     quantityCart:1,
+     sizeCart:selectedSize[0].name_size,
  
-//    }))
+   }))
   
 
    setCopieProductDetail(productdetails)

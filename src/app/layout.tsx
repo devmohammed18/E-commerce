@@ -4,7 +4,7 @@ import "./globals.css";
 import { typeCategorie,typeSubCategorie } from "./util/type/type";
 import Header from "./_component/header/header";
 import Footer from "./_component/footer/footer";
-
+import ProvidreStore from "./util/providerstor/providerstor";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -84,14 +84,16 @@ console.log('=====================serveur subcat===============')
           </ClerkLoading>   */}
 
           {/* <ClerkLoaded>  */}
-          {/* <ProvidreStore> */}
+          <ProvidreStore>
 
           <Header categories={categories} subCategories={subCategories} /> 
                 {/* <Suspense fallback={<div>Laoding...</div>} > */}
                 {children}
                 {/* </Suspense> */}
                 <Footer />
-            {/* </ProvidreStore>  */}
+                
+            </ProvidreStore> 
+
         {/* </ClerkLoaded>  */}
 
 

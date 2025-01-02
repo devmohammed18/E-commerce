@@ -41,7 +41,7 @@ function NavBar({categories,subCategories}:{categories:typeCategorie[],subCatego
                 
                 
         </div>
-        <button onClick={()=>{setToggelNav(false);setToggelSub(true)}} className="hidden sm:block sm:absolute sm:top-5 md:block md:absolute md:top-5 right-3  text-red-500 text-2xl font-bold ">
+        <button onClick={()=>{setToggelNav(false);setToggelSub(true)}} className="hidden sm:block sm:absolute sm:top-5 md:block md:absolute md:top-5 left-3  text-red-500 text-2xl font-bold ">
            <LiaTimesSolid />
         </button>
        

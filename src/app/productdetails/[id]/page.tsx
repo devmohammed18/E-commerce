@@ -21,7 +21,7 @@ type typeParams=Promise<{id:number}>
 
 
  async function  ProductDetalis({params}:{params:typeParams}) {
-    // const {id}=React.use(params);
+    
     const id=(await params).id
      console.log('idddddddddddd',id)
    

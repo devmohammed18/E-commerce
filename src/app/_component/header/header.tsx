@@ -9,9 +9,9 @@ import { ToggelHeaderContext } from "@/app/util/hooks/toggelHeaderContext";
 
 import Link from "next/link";
 import { typeCategorie, typeSubCategorie } from "@/app/util/type/type";
-//import Cart from "../menucart/menucart";
-// import { useSelector } from "react-redux";
-// import { RootState } from "@/app/redux/store";
+import MenuCart from "../menucart/menucart";
+   import { useSelector } from "react-redux";
+    import { RootState } from "@/app/util/redux/strore";
 // import { ClerkLoaded, UserButton, useUser } from "@clerk/nextjs";
 
 
@@ -30,7 +30,7 @@ useEffect(()=>{
   
   const [toggelSub,setToggelSub]=useState<boolean>(false)// show list subcategorie
   const [titleCat,setTitleCat]=useState<string>("")// title Categorie
-  // const products=useSelector((state:RootState)=>state.cart.products)
+   const products=useSelector((state:RootState)=>state.cart.products)
  console.log('================header=================')
   console.log(subCategories)
   console.log('================header=================') 
@@ -60,7 +60,7 @@ useEffect(()=>{
                       <div className="relative" >
 
                         <span className=" absolute right-0.5 -top-1 w-5 h-5 rounded-full flex justify-center items-center bg-red-700 ">
-                         {/* {products.length} */}
+                         {products.length}
                         </span>
                         <button onClick={()=>setShowCart(true)} 
                                 className="sm:text-md w-10 h-10 flex justify-center items-center text-xl bg-transparent  rounded-full hover:bg-slate-700 " ><FaShoppingCart /> 
@@ -89,7 +89,7 @@ useEffect(()=>{
 
         </div>
 
-        {/* <Cart /> */}
+      <MenuCart />
     </div>
    
     </ToggelHeaderContext.Provider>
