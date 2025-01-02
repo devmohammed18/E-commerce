@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+// import { Suspense } from "react";
 import { typeCategorie,typeSubCategorie } from "./util/type/type";
 import Header from "./_component/header/header";
 import Footer from "./_component/footer/footer";
@@ -91,7 +92,7 @@ console.log('=====================serveur subcat===============')
                 {children}
                 {/* </Suspense> */}
                 <Footer />
-                
+
             </ProvidreStore> 
 
         {/* </ClerkLoaded>  */}
