@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react"
 import { IoMenuSharp } from "react-icons/io5";
 import { FaShoppingCart } from "react-icons/fa";
-//import { IoMdContact } from "react-icons/io";
+import { IoMdContact } from "react-icons/io";
 import NavBar from "../navbar/navbar";
 import { ToggelHeaderContext } from "@/app/util/hooks/toggelHeaderContext";
 
@@ -12,14 +12,14 @@ import { typeCategorie, typeSubCategorie } from "@/app/util/type/type";
 import MenuCart from "../menucart/menucart";
    import { useSelector } from "react-redux";
     import { RootState } from "@/app/util/redux/strore";
-// import { ClerkLoaded, UserButton, useUser } from "@clerk/nextjs";
+ import {  UserButton, useUser } from "@clerk/nextjs";
 
 
 
 
 
 function Header({categories,subCategories}:{categories:typeCategorie[],subCategories:[string,typeSubCategorie[]][]}) {
- // const {user}=useUser();
+  const {user}=useUser();
 useEffect(()=>{
  
 
@@ -66,10 +66,24 @@ useEffect(()=>{
                                 className="sm:text-md w-10 h-10 flex justify-center items-center text-xl bg-transparent  rounded-full hover:bg-slate-700 " ><FaShoppingCart /> 
                         </button>
                       </div> 
+                       
+                       {/* <ClerkLoaded> */}
+                        {/* {
+                          user?
+                          <SignedIn>
+                                <UserButton />
+                          </SignedIn>
+                          :
+                          <SignedOut>
+                            <SignInButton/>
+                          </SignedOut>
+                        } */}
 
+                       {/* </ClerkLoaded> */}
 
-{/* 
-                      <ClerkLoaded>
+                      
+
+                      {/* <ClerkLoaded> */}
                         {user?
                         
                             <UserButton />
@@ -82,7 +96,7 @@ useEffect(()=>{
                         
                     
                         </Link> }
-                      </ClerkLoaded> */}
+                      {/* </ClerkLoaded> */}
               
                 </div>
             </div>

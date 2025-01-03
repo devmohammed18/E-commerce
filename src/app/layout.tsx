@@ -6,6 +6,7 @@ import { typeCategorie,typeSubCategorie } from "./util/type/type";
 import Header from "./_component/header/header";
 import Footer from "./_component/footer/footer";
 import ProvidreStore from "./util/providerstor/providerstor";
+import { ClerkProvider } from "@clerk/nextjs";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -64,6 +65,7 @@ console.log('=====================serveur subcat===============')
 
 
   return (
+    <ClerkProvider>
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable}`}
@@ -100,5 +102,7 @@ console.log('=====================serveur subcat===============')
 
       </body>
     </html>
+    </ClerkProvider>
+    
   );
 }
