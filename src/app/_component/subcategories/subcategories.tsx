@@ -6,16 +6,17 @@ import { Dispatch, SetStateAction, useContext } from "react"
 import { typeSubCategorie } from "@/app/util/type/type"
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
-import { ToggelHeaderContext } from "@/app/util/hooks/toggelHeaderContext"
+
+import { GlobalContext } from "@/app/util/globalcontext/globalecontext";
 export default function SubCategories({ title_cat, subCategories, setShowList }:
     { title_cat: string, subCategories: [string, typeSubCategorie[]][], setShowList: Dispatch<SetStateAction<boolean>> }) {
 
     // const [titleSub,setTitleSub]=useState<>("")
 
-    const context = useContext(ToggelHeaderContext)
+    const context = useContext(GlobalContext)
 
     if (!context) {
-        throw new Error("ToggelHeaderContext must be used within a HeaderContextProvider")
+        throw new Error("GlobalContext must be used within a GlobalContextProvider")
     }
 
     if (!title_cat) {
@@ -79,13 +80,13 @@ export default function SubCategories({ title_cat, subCategories, setShowList }:
                               return (<li key={index} className="sm:text-xl sm:opacity-80  sm:px-3  sm:py-2   w-full pl-4 py-2  capitalize hover:bg-slate-600">
                                     <div className="sm:w-full sm:border-b-2 sm:border-solid sm:py-2 sm:border-[var(--secondary-color)]
                                         md:w-full md:border-b-2 md:border-solid md:py-2 md:border-[var(--secondary-color)]  
-                                        flex justify-between items-center">
+                                        flex justify-between items-center"
+                                        >
                                         {/* handelApi(e,`products?populate[images][populate]=*&filters[categories][title_cat][$eq]=${title_cat}&filters[subcategories][title_sub][$eq]=${title_sub}`), */}
                                         <Link
                                             href={`/products/${title_cat}/${title_sub} `}
-                                            onClick={() => { setShowList(false); setToggelNav(false); setToggelSub(false) }}
-
-                                            className="cursor-pointer " >
+                                            className="cursor-pointer w-full " 
+                                            onClick={() => { setShowList(false); setToggelNav(false); setToggelSub(false) }}>
                                             {title_sub}
                                         </Link>
                                         <span className="hidden sm:block md:block" ><IoIosArrowForward /></span>

@@ -52,7 +52,7 @@ export interface propsSub{
 
    
 /************************* type Toggel  **************************** */
-export interface ToggelHeadeContextType{
+export interface typeGlobalContext{
     
     titleCat:string,
     setTitleCat:Dispatch<SetStateAction<string>>,
@@ -62,4 +62,6 @@ export interface ToggelHeadeContextType{
     setToggelNav:Dispatch<SetStateAction<boolean>>
     showCart:boolean,
     setShowCart:Dispatch<SetStateAction<boolean>>
+    disableFaShoppingCart:boolean,
+    setDisableFaShoppingCart:Dispatch<SetStateAction<boolean>>
 }

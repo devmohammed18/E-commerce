@@ -1,13 +1,12 @@
 'use client'
 
 import { RootState } from '@/app/util/redux/strore'
-import { ToggelHeaderContext } from '@/app/util/hooks/toggelHeaderContext'
-
 import React, { useContext, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Image from 'next/image'
 import Link from 'next/link'
 import { decrementCart, getTotalsQuantity, incrementCart } from '@/app/util/redux/reduce'
+import { GlobalContext } from '@/app/util/globalcontext/globalecontext'
 
 
 
@@ -18,9 +17,9 @@ function MenuCart() {
   const dispatch=useDispatch()
   console.log(products)
  
- const context=useContext(ToggelHeaderContext)
+ const context=useContext(GlobalContext)
    if(!context){
-    throw new Error('verfier ToggleHeaderContext') }
+    throw new Error('GlobalContext must be used within a GlobalContextProvider') }
     const {setShowCart,showCart}=context;
 
 // const incrementCart=()=>{
@@ -82,7 +81,7 @@ function MenuCart() {
                         <li key={index} className="flex items-center gap-4">
                         <div className='w-14 h-16'>
                             <Image
-                            src={images[0].url_image[0].url}
+                            src={images[0]?.url_image[0]?.url}
                             alt="image"
                             width={80}
                             height={80}
@@ -100,7 +99,7 @@ function MenuCart() {
 
                             <div>
                             <dt className="inline">Price:</dt>
-                            <dd className="inline">{images[0].price}</dd>
+                            <dd className="inline">{images[0]?.price}</dd>
                             </div>
                         </dl>
                         </div>
@@ -195,7 +194,8 @@ function MenuCart() {
                 </Link>
 
                 <Link
-                    href="#"
+                    href="/"
+                    onClick={()=>setShowCart(false)}
                     className="inline-block text-sm text-gray-500 underline underline-offset-4 transition hover:text-gray-600"
                 >
                     Continue shopping

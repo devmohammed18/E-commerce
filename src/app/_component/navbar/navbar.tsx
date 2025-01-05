@@ -3,16 +3,16 @@ import Categories from '../categories/categories'
 import { LiaTimesSolid } from 'react-icons/lia'
 
 import Link from 'next/link';
-import { ToggelHeaderContext } from '@/app/util/hooks/toggelHeaderContext'
 import { typeCategorie, typeSubCategorie} from '@/app/util/type/type';
+import { GlobalContext } from '@/app/util/globalcontext/globalecontext';
 
 
 function NavBar({categories,subCategories}:{categories:typeCategorie[],subCategories:[string,typeSubCategorie[]][]}) {
 
- const context =useContext(ToggelHeaderContext);
+ const context =useContext(GlobalContext);
 
  if(!context){
-    throw new Error ("ToggelHeaderContext must be used within a HeaderContextProvider")
+    throw new Error ("GlobalContext must be used within a GlobalContextProvider")
  }
  
     const {toggelNav,setToggelNav,setToggelSub}=context;
@@ -24,7 +24,7 @@ function NavBar({categories,subCategories}:{categories:typeCategorie[],subCatego
     <div className='flex justify-center items-center border-0 border-solid border-green-900'>
            
 <div  style={{left:toggelNav?'0':'-1400px' }}
-      className={`sm:fixed sm:top-0 sm:bottom-0 sm:-left-[300px] sm:w-full sm:bg-[var(--primary-color)] 
+      className={`sm:z-50 md:z-50 sm:fixed sm:top-0 sm:bottom-0 sm:-left-[300px] sm:w-full sm:bg-[var(--primary-color)] 
                   md:fixed md:top-0 md:bottom-0  md:w-full  md:bg-[var(--primary-color)] 
                   flex justify-center items-start  text-xl transition-all duration-500 ease-linear `}>
          {/*  md:pl-2 md:flex-col md:items-start md:w-full md:mt-20 */}

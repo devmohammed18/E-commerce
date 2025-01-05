@@ -8,7 +8,8 @@ import { useContext,useState } from "react"
 import {typeSubCategorie} from "@/app/util/type/type"
 import { typeCategorie } from "@/app/util/type/type"
 import { IoIosArrowForward } from "react-icons/io";
-import { ToggelHeaderContext } from "@/app/util/hooks/toggelHeaderContext"
+
+import { GlobalContext } from "@/app/util/globalcontext/globalecontext"
 
 function Categories({ categories,subCategories }:{categories:typeCategorie[],subCategories:[string,typeSubCategorie[]][]}) {
 
@@ -17,7 +18,7 @@ function Categories({ categories,subCategories }:{categories:typeCategorie[],sub
 
 const [showList,setShowList]=useState<boolean>(true)
 
-const context=useContext(ToggelHeaderContext);
+const context=useContext(GlobalContext);
 if(!context){
 
     throw new Error("ToggelHeaderContext must be used within a HeaderContextProvider")
@@ -59,10 +60,11 @@ const functionShowList = (e: React.MouseEvent,filtercat:string) => {
                            
                           relative py-7 box-border  flex justify-center items-center transition-all duration-500 ease-linear  ">          
                  
-                 <div className="w-full flex justify-between items-center">
+                 <div className="w-full flex justify-between items-center"
+                       onMouseMove={(e)=>{functionShowList(e,title_cat);setShowList(true);setToggelSub(false)}} 
+                       onClick={(e)=>{setToggelSub(false);functionShowList(e,title_cat);setShowList(true)}} >
                     <Link href="#" 
-                           onMouseMove={(e)=>{functionShowList(e,title_cat);setShowList(true);setToggelSub(false)}} 
-                           onClick={(e)=>{setToggelSub(false);functionShowList(e,title_cat);setShowList(true)}} 
+                          
                           >
                           {title_cat}
                     </Link>

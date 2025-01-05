@@ -1,17 +1,24 @@
 'use client'
 import { typeProduct } from '@/app/util/type/type'
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import Image from 'next/image'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { addCart } from '@/app/util/redux/reduce'
+import { GlobalContext } from '@/app/util/globalcontext/globalecontext'
 function BodyProductDetails({productdetails}:{productdetails:typeProduct} ) {
   
   const [indexPositionImage,setIndexPositionImage]=useState(0) //select la position de product
   const [indexColorImage,setIndexColorImage]=useState(0) //select la color de product
-  const [selectColorImage,setSelectImage]=useState<number |null >(null)
+  const [selectColorImage,setSelectImage]=useState<number >(productdetails.images[0].id)
   const [indexSize,setIndextSize]=useState<number |null >(null);// selected size 
   const [selectSize,setSelectSize]=useState<string>('')
+  const context=useContext(GlobalContext)
+  if(!context){
+    throw new Error('GlobalContext must be within ProvaderGlobalContext')
+  } 
+
+  const {setShowCart,setToggelNav}=context
   const dispatch=useDispatch();  
   
   // retrieve all sizes the product this Color
@@ -39,6 +46,9 @@ function BodyProductDetails({productdetails}:{productdetails:typeProduct} ) {
   const selectedSize=selectSizes.filter((size)=>size.name_size===selectSize)
 
   //rertieve the color the product Selcted
+   copieProductdetail.images.map(({id})=>
+(console.log('id image :',id)))
+
   const selectedColorImage=copieProductdetail.images.filter(
     (image)=>image.id===selectColorImage)  
   // update the sizes ['s','m','l'] this product select by size selected
@@ -56,15 +66,15 @@ function BodyProductDetails({productdetails}:{productdetails:typeProduct} ) {
    // if don t select size 
    const [alertSize,setAlerSize]=useState(false)
     // if don t select Color image
-   const [alertSelectColorImage,setSelectColorImage]=useState(false)
    
- 
+   
+ //Foction Add Product
 
    const addProduct=()=>{
-   if (selectedSize.length>0 && selectedColorImage.length>0){
+   if (selectedSize.length>0 ){
 
     setAlerSize(false)
-    setSelectColorImage(false)
+  
    
    // updateColorImage()
     
@@ -81,7 +91,9 @@ function BodyProductDetails({productdetails}:{productdetails:typeProduct} ) {
  
    }))
   
-
+   setShowCart(true)
+   setToggelNav(false)
+   
    setCopieProductDetail(productdetails)
    
    //selectedColorImage[0].sizes = selectedSize.map(({ name_size }) => ({ name_size }));
@@ -89,7 +101,7 @@ function BodyProductDetails({productdetails}:{productdetails:typeProduct} ) {
 
    }else{
     setAlerSize(true)
-    setSelectColorImage(true)
+  
    }
   
 
@@ -196,7 +208,7 @@ function BodyProductDetails({productdetails}:{productdetails:typeProduct} ) {
                         
 
                     </div>
-                    {alertSelectColorImage && <h1 className='text-red-600' >Please select a Color.</h1>} 
+                   
                     {/************************** Sizes the Poducts  *******************/}
                     {/* className='w-full h-full flex justify-start items-center flex-wrap gap-x-4 gap-y-2 border-2 my-2 border-solid border-black' */}
                     
@@ -222,7 +234,7 @@ function BodyProductDetails({productdetails}:{productdetails:typeProduct} ) {
                           console.log([{ name_size: selectedSize.map(({ name_size }) => ({ name_size })) }])
                           console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@')
                           addProduct()
-                         
+                          
                         
                         }}
                          >

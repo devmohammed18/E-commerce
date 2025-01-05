@@ -1,9 +1,17 @@
 import React from 'react'
 import BodyCart from './_component/bodycart'
-function Cart() {
-  return (
+
+
+async function Cart() {
+   
+
+
+ 
+
+    return (
     <div>
-      <BodyCart />
+      
+    <BodyCart />
     </div>
   )
 }

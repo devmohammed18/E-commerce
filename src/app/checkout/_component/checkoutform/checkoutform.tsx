@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import { useStripe, useElements, PaymentElement } from '@stripe/react-stripe-js';
 import { RootState } from '@/app/util/redux/strore';
@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useUser } from '@clerk/nextjs';
 import Loading1 from '@/app/_component/loading/loading';
 import { removeCart } from '@/app/util/redux/reduce';
+import { GlobalContext } from '@/app/util/globalcontext/globalecontext';
 
 
 
@@ -19,6 +20,12 @@ const CheckoutForm = () => {
     const elements = useElements();
     //const [setErrorMessage] = useState();
     const [loading, setLoading] = useState<boolean>(false);
+    const context=useContext(GlobalContext)
+
+    if(!context){
+       throw new Error('')
+    }
+    const {setDisableFaShoppingCart}=context;
 
     const { products, totalAmountCart } = useSelector((state: RootState) => state.cart)
     const dispatch = useDispatch()
@@ -199,7 +206,7 @@ const CheckoutForm = () => {
 
             createOrder()
             dispatch(removeCart())
-            
+            setDisableFaShoppingCart(false)
         const { error } = await stripe.confirmPayment({
             elements,
             clientSecret: data.clientSecret,
@@ -247,10 +254,13 @@ const CheckoutForm = () => {
             </form>
 
             :
-            (<form onSubmit={handleSubmit}>
+            (
+            
+            <form onSubmit={handleSubmit}>
                 <PaymentElement />
                 <button type="submit" className='w-full h-10 bg-black mt-4 text-white payment rounded-md '>pay ${totalAmountCart}</button>
-            </form>)
+            </form>
+             )
 
     );
 

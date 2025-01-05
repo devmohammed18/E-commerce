@@ -1,12 +1,13 @@
 
 'use client'
-import React, {  useEffect } from 'react'
+import React, {  useContext, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/app/util/redux/strore'
 import { incrementCart,decrementCart, getTotalsAmount, getTotalsQuantity } from '../../util/redux/reduce'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-//import { useUser } from '@clerk/nextjs'
+import { useUser } from '@clerk/nextjs'
+import { GlobalContext } from '@/app/util/globalcontext/globalecontext'
 
 
 
@@ -15,19 +16,29 @@ function BodyCart() {
 
 
   const router= useRouter()
-  //const {user}=useUser()
+  const {user}=useUser()
   const {products,totalAmountCart,totalQuantityCart}=useSelector((state:RootState)=>state.cart)
+  const context=useContext(GlobalContext)
+  if(!context){
+    throw new Error('')
+  }
+
+  const {setDisableFaShoppingCart}=context
   const dispatch=useDispatch()
+
 
   const handleCheckOut=()=>{
       
-    //  if(!user) {
-    //     router.push('/sign-in')
-    //  }else{
-    //   router.push('/checkout')
-    //   //router.push(`/checkout?amount=${amount}`)
-    //  }
-     router.push('/checkout')
+     if(!user) {
+        setDisableFaShoppingCart(false)
+        router.push('/sign-in')
+     }else{
+        setDisableFaShoppingCart(true)
+      router.push('/checkout')
+
+      //router.push(`/checkout?amount=${amount}`)
+     }
+    
 
   }
  
@@ -41,7 +52,12 @@ function BodyCart() {
   },[products])
   console.log(products)
 
-
+//   if(!user){
+//     return router.push('/sign-in')
+//   }
+//  if(user){
+//   return  router.push('/checkout') 
+//  }
   
 
   
