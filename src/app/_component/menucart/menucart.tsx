@@ -72,7 +72,7 @@ function MenuCart() {
 
 
            {products.length===0?
-            <div className="mt-4 space-y-6 text-center   border-2 border-solid border-red-800 capitalize ">
+            <div className="mt-4 space-y-6 text-center   border-0 border-solid border-red-800 capitalize ">
                 <h1 >basket is empty</h1>
             </div>
             
@@ -80,32 +80,33 @@ function MenuCart() {
                 <ul className="space-y-4">
 
                     {products.map(({id,title_pro,desc_pro,images,sizeCart,priceCart,quantityCart},index:number)=>(
-                        <li key={index} className="flex items-center gap-4">
-                        <div className='w-14 h-16'>
-                            <Image
-                            src={images[0]?.url_image[0]?.url}
-                            alt="image"
-                            width={80}
-                            height={80}
-                            className="w-full h-full rounded object-cover"
-                            />
-                        </div>
-                        <div>
-                        <h3 className="text-sm text-gray-900">{title_pro}</h3>
-
-                        <dl className="mt-0.5 space-y-px text-[10px] text-gray-600">
-                            <div>
-                            <dt className="inline">Size:</dt>
-                            <dd className="inline">{sizeCart}</dd>
+                        <li key={index} className="flex justify-between items-center gap-4">
+                      <div className='flex justify-start items-center gap-2 '>  
+                            <div className='w-14 h-16'>
+                                <Image
+                                src={images[0]?.url_image[0]?.url}
+                                alt="image"
+                                width={80}
+                                height={80}
+                                className="w-full h-full rounded object-cover"
+                                />
                             </div>
-
                             <div>
-                            <dt className="inline">Price:</dt>
-                            <dd className="inline">{images[0]?.price}</dd>
+                            <h3 className="text-sm text-gray-900">{title_pro}</h3>
+
+                            <dl className="mt-0.5 space-y-px text-[10px] text-gray-600">
+                                <div>
+                                <dt className="inline">Size:</dt>
+                                <dd className="inline">{sizeCart}</dd>
+                                </div>
+
+                                <div>
+                                <dt className="inline">Price:</dt>
+                                <dd className="inline">{images[0]?.price}</dd>
+                                </div>
+                            </dl>
                             </div>
-                        </dl>
-                        </div>
-                            
+                        </div>    
                         
                         {/***************************Counter the Quantite *****************************  */}
                         <div className="w-max rounded-full ">

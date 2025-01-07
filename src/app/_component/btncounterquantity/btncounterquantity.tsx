@@ -19,7 +19,7 @@ const context=useContext(GlobalContext);
     throw new Error('GlobalContext be mutch within GlobalContextProvider')
   }
 
-  const {setDisCounterQuantite,disCounterQuantity,setShowCart}=context
+  const {setDisCounterQuantite,disCounterQuantity}=context
 
 //function decrement quantite the cart
 
@@ -36,9 +36,8 @@ const handlerDecrementCart=()=>{
     priceCart:priceCart,
     quantityCart:quantityCart,
 }))
- if(quantityCart===1){
-  setShowCart(false)
- }//end if
+ 
+ 
 }//end if
 
 
