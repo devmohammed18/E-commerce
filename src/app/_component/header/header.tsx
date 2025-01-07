@@ -37,7 +37,7 @@ useEffect(()=>{
   if(!context){
     throw new Error ('GlobalContext must be used within a HeaderContextProvider')
   }
-  const {setShowCart,titleCat,setToggelNav,setToggelSub,disableFaShoppingCart}=context
+  const {setShowCart,titleCat,setToggelNav,setToggelSub,disableFaShoppingCart,setDisableFaShoppingCart}=context
  console.log('================header=================')
   console.log(subCategories)
   console.log('================header=================') 
@@ -51,7 +51,7 @@ useEffect(()=>{
                   
                   <div  className=" sm:gap-5 flex justify-between items-center  gap-14 border-0 border-solid border-red-800 cursor-pointer" >
                     
-                      <button onClick={()=>{setToggelNav(true);setToggelSub(true);setShowCart(false)}} 
+                      <button onClick={()=>{setToggelNav(true);setToggelSub(true);setShowCart(false);setDisableFaShoppingCart(false)}} 
                            className="hidden sm:block md:block cursor-pointer text-2xl" >
                         <IoMenuSharp />
                       </button>

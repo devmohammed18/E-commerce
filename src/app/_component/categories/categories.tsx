@@ -27,7 +27,7 @@ if (!categories || !subCategories) {
     return <div>Categories or SubCategories data is missing.</div>;
   }
 
-const {titleCat,setTitleCat,setToggelSub,toggelSub}=context
+const {titleCat,setTitleCat,setToggelSub,toggelSub,setDisableFaShoppingCart}=context
 console.log('*************************************************')
 console.log(categories)
 console.log('*************************************************')
@@ -60,8 +60,8 @@ const functionShowList = (e: React.MouseEvent,filtercat:string) => {
                           relative py-7 box-border  flex justify-center items-center transition-all duration-500 ease-linear  ">          
                  
                  <div className="w-full flex justify-between items-center"
-                       onMouseMove={(e)=>{functionShowList(e,title_cat);setShowList(true);setToggelSub(false)}} 
-                       onClick={(e)=>{setToggelSub(false);functionShowList(e,title_cat);setShowList(true)}} >
+                       onMouseMove={(e)=>{functionShowList(e,title_cat);setShowList(true);setToggelSub(false);setDisableFaShoppingCart(false)}} 
+                       onClick={(e)=>{setToggelSub(false);functionShowList(e,title_cat);setShowList(true);setDisableFaShoppingCart(false)}} >
                     <Link href="#" 
                           
                           >
