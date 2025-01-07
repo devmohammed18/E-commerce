@@ -66,7 +66,7 @@ else {
 }
 
   return (
-    <div className=' flex items-center justify-center'>
+    <div className=' flex items-center justify-center border-2 border-solid border-gray-600 rounded-full '>
         {/* ****************Button Plus( + )  ************* */}
                                         
                                           <button  

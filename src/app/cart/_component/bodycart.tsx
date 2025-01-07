@@ -117,9 +117,9 @@ function BodyCart() {
                                 <dd className="inline">${images[0].price}</dd>
                               </div>
                               
-                                {/******************************  Quantity  ***********************/}
+                                {/******************************  Button Couter Quantity  ***********************/}
                               
-                              <div className='w-max border-2 border-solid border-red-500 rounded-full'>
+                              <div className='w-max'>
                                  <BtncounterQuantity width={35} height={30} id={id} title_pro={title_pro} desc_pro={desc_pro} images={images} priceCart={priceCart} sizeCart={sizeCart} quantityCart={quantityCart} />
                               </div>
 

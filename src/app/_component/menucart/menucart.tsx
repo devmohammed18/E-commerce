@@ -36,6 +36,7 @@ function MenuCart() {
 
 // }
 
+
   useEffect(()=>{
     dispatch(getTotalsQuantity())
   },[products])
@@ -75,7 +76,7 @@ function MenuCart() {
                 <h1 >basket is empty</h1>
             </div>
             
-            :<div className="mt-4 space-y-6   border-2 border-solid border-red-800 ">
+            :<div className="mt-4 space-y-6   border-0 border-solid border-red-800 ">
                 <ul className="space-y-4">
 
                     {products.map(({id,title_pro,desc_pro,images,sizeCart,priceCart,quantityCart},index:number)=>(
@@ -107,7 +108,7 @@ function MenuCart() {
                             
                         
                         {/***************************Counter the Quantite *****************************  */}
-                        <div className="w-max border-2 border-solid border-red-500 rounded-full ">
+                        <div className="w-max rounded-full ">
                           <BtnCounterQuantity width={29} height={29} id={id} title_pro={title_pro} desc_pro={desc_pro} images={images} priceCart={priceCart} sizeCart={sizeCart} quantityCart={quantityCart} />
                         </div>
 
@@ -120,7 +121,7 @@ function MenuCart() {
                 <div className="space-y-4 text-center">
                 <Link
                     href="/cart"
-                    className="block rounded border border-gray-600 px-5 py-3 text-sm text-gray-600 transition hover:ring-1 hover:ring-gray-400"
+                    className="block rounded border border-gray-600 bg-gray-600 px-5 py-3 text-sm text-white transition hover:ring-1 hover:ring-gray-400"
                     onClick={()=>{ setShowCart(false)}}              
                 >
                     View my cart ({totalQuantityCart})
@@ -134,17 +135,18 @@ function MenuCart() {
                     View my cart ({totalQuantityCart})
                 </button> */}
 
-                <Link
-                    href="#"
-                    className="block rounded bg-gray-700 px-5 py-3 text-sm text-gray-100 transition hover:bg-gray-600"
+                {/* <Link
+                    href="/checkout"
+                    className=" block w-full rounded bg-gray-700 px-5 py-3 text-sm text-gray-100 transition hover:bg-gray-600"
                 >
                     Checkout
-                </Link>
+                </Link> */}
 
                 <Link
                     href="/"
                     onClick={()=>setShowCart(false)}
-                    className="inline-block text-sm text-gray-500 underline underline-offset-4 transition hover:text-gray-600"
+                    //className=" block w-full rounded bg-gray-700 px-5 py-3 text-sm text-gray-100 transition hover:bg-gray-600"
+                    className="inline-block text-sm  text-gray-500 underline underline-offset-4 transition hover:text-gray-600"
                 >
                     Continue shopping
                 </Link>
