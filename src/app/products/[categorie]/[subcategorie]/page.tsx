@@ -56,7 +56,7 @@ async function Products({params,}:{params:typeParamsCatSub}) {
     {products && products.map(({id,title_pro,images}:typeProduct,index:number)=>(
       
 
-    <div className='sm:w-full w-72 h-full border-2 border-solid border-red-900'  key={index}>
+    <div className='sm:w-full w-72 h-full border-0 border-solid border-red-900'  key={index}>
           
         <Link href={`/productdetails/${id} `} className=" sm:w-full block rounded-lg p-4 shadow-sm shadow-indigo-100 border hover:shadow-md hover:border hover:border-solid hover:border-indigo-300 hover:rounded-lg ">
             {/* ********************   big image Cart Product ******************** */}

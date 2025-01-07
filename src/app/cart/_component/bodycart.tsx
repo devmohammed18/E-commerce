@@ -1,13 +1,14 @@
 
 'use client'
-import React, {  useContext, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, {useEffect,useContext} from 'react'
+import { useSelector,useDispatch } from 'react-redux'
 import { RootState } from '@/app/util/redux/strore'
-import { incrementCart,decrementCart, getTotalsAmount, getTotalsQuantity } from '../../util/redux/reduce'
+import {getTotalsAmount, getTotalsQuantity } from '../../util/redux/reduce'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useUser } from '@clerk/nextjs'
 import { GlobalContext } from '@/app/util/globalcontext/globalecontext'
+import BtncounterQuantity from '@/app/_component/btncounterquantity/btncounterquantity'
 
 
 
@@ -18,13 +19,14 @@ function BodyCart() {
   const router= useRouter()
   const {user}=useUser()
   const {products,totalAmountCart,totalQuantityCart}=useSelector((state:RootState)=>state.cart)
+  const dispatch=useDispatch()
   const context=useContext(GlobalContext)
   if(!context){
-    throw new Error('')
+    throw new Error('GlobalContext be mutch within GlobalContextProvider')
   }
 
   const {setDisableFaShoppingCart}=context
-  const dispatch=useDispatch()
+  
 
 
   const handleCheckOut=()=>{
@@ -34,7 +36,7 @@ function BodyCart() {
         router.push('/sign-in')
      }else{
         setDisableFaShoppingCart(true)
-      router.push('/checkout')
+        router.push('/checkout')
 
       //router.push(`/checkout?amount=${amount}`)
      }
@@ -116,55 +118,9 @@ function BodyCart() {
                               </div>
                               
                                 {/******************************  Quantity  ***********************/}
-                              <div className='w-[150px] h-[35px] mt-2  rounded-full flex justify-center items-center  border-2 border-solid border-gray-400 '>
-                                  {/* ****************Button Plus( + )  ************* */}
-                                
-                                  <button  className='w-[50px]  h-[35px] rounded-full border-0 border-solid flex justify-center items-center border-blue-500 hover:bg-slate-400 '
-                                      
-                                          onClick={() =>{ dispatch(incrementCart({
-                                              id:id,
-                                              title_pro:title_pro,
-                                              desc_pro:desc_pro,
-                                              images:images,
-                                              priceCart:priceCart,
-                                              sizeCart:sizeCart,
-                                              quantityCart:quantityCart
-                                          }))}}
-                                  >+</button>
-                                  
-                                  {/* ******************* Input  ******************** */}
-                                  <input className='w-[50px] h-[35px] text-center' disabled 
-                                  value={quantityCart} />
-
-                                  {/* ***************Button Moin( - ) *****************/}
-                                  <button onClick={()=>{dispatch(decrementCart({
-                                      id:id,
-                                      title_pro:title_pro,
-                                      desc_pro,
-                                      images:images,
-                                      sizeCart:sizeCart,
-                                      priceCart:priceCart,
-                                      quantityCart:quantityCart,
-                                  }))}} 
-                                  
-                                  className='w-[50px] h-[35px] rounded-full border-0 border-solid flex justify-center items-center border-blue-500 hover:bg-slate-400 '>
-                                  {quantityCart>1?
-                                  (<span>-</span>)
-                                  :(<svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  fill="none"
-                                  viewBox="0 0 24 24"
-                                  strokeWidth="1.5"
-                                  stroke="currentColor"
-                                  className="size-4"
-                                  >
-                                  <path
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                      d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
-                                  />
-                                  </svg>)}
-                                  </button>
+                              
+                              <div className='w-max border-2 border-solid border-red-500 rounded-full'>
+                                 <BtncounterQuantity width={35} height={30} id={id} title_pro={title_pro} desc_pro={desc_pro} images={images} priceCart={priceCart} sizeCart={sizeCart} quantityCart={quantityCart} />
                               </div>
 
 

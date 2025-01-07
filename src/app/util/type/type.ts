@@ -51,7 +51,7 @@ export interface propsSub{
     } 
 
    
-/************************* type Toggel  **************************** */
+/************************* type GlobaleContext All State the appliction  **************************** */
 export interface typeGlobalContext{
     
     titleCat:string,
@@ -64,4 +64,18 @@ export interface typeGlobalContext{
     setShowCart:Dispatch<SetStateAction<boolean>>
     disableFaShoppingCart:boolean,
     setDisableFaShoppingCart:Dispatch<SetStateAction<boolean>>
+    disCounterQuantity:boolean,
+    setDisCounterQuantite:Dispatch<SetStateAction<boolean>>
 }
+/************* tye the button increment and decrement quantity the cart******** */
+export interface typeBtnCounterQuantity{
+    width:number,
+    height:number,
+    id:typeProduct['id'],
+    title_pro:typeProduct['title_pro'],
+    desc_pro:typeProduct['desc_pro'],
+    images:typeProduct['images'],
+    priceCart:typeProduct['priceCart'],
+    sizeCart:typeProduct['sizeCart'],
+    quantityCart:typeProduct['quantityCart']
+  }

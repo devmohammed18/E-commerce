@@ -8,7 +8,6 @@ import { useContext,useState } from "react"
 import {typeSubCategorie} from "@/app/util/type/type"
 import { typeCategorie } from "@/app/util/type/type"
 import { IoIosArrowForward } from "react-icons/io";
-
 import { GlobalContext } from "@/app/util/globalcontext/globalecontext"
 
 function Categories({ categories,subCategories }:{categories:typeCategorie[],subCategories:[string,typeSubCategorie[]][]}) {
