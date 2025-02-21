@@ -1,10 +1,11 @@
+
 import FraisLivraison from "./_component/bodycheckoutcash/bodycheckoutcash"
 
 
 const getFraisLivreson= async ()=>{
       
   try{
-     const res=await fetch('http://localhost:3000/api/fraisLivraison')
+     const res=await fetch(`${process.env.NEXT_PUBLIC_URLL}/api/fraisLivraison`)
      const data=await res.json()
      
      if(!data){

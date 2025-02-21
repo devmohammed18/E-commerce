@@ -27,6 +27,8 @@ const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
 function FraisLivraison({DataFraisLivraison}:{DataFraisLivraison:string[]}) {
 
  
+
+
     
     const [indexDataFaisLivraison,setIndexDataFraisLivraison]=useState<number>(0)// la position de la ligne de table DataFraisLivraison (fichier xlsl de livraison) 
     //type '2'=livraison au bueau and type'4'=== livraison a domicile
@@ -34,6 +36,17 @@ function FraisLivraison({DataFraisLivraison}:{DataFraisLivraison:string[]}) {
     //const [nameTypeLivraison,setNameTypeLivraison]=useState<string>('Livraison au Bureau')
     const {products,totalAmountCart}=useSelector((state:RootState)=>state.cart)
     
+   if(!DataFraisLivraison || !DataFraisLivraison[0]){
+
+    return (
+
+        <div className="w-full h-screen flex justify-center items-center">
+          No Delivery Data Available
+        </div>
+    )
+
+   }
+
     // function for select value the button Radio (type livraison)
     const handlerBtnRadio = (e: React.ChangeEvent<HTMLInputElement>) => {
         
@@ -131,7 +144,7 @@ const options:StripeElementsOptions= {
           
     <div className=" sm:flex sm:flex-col-reverse sm:items-center w-full min-h-screen px-6 flex justify-start items-start gap-3 border-2 border-solid border-red-700 " >
        
-     
+         {/* details frais livreson and frais paiement */}
         <section className=" sm:w-full w-3/5 h-full flex  flex-col justify-start items-start gap-4 border-0 border-solid border-gray-600 p-4 " >
             {/*                         title détails de la livraison             */}
            <div className="text-xl pb-3 border-b-2 border-solid border-b-gray-600 capitalize " >delivry details</div>
@@ -149,7 +162,7 @@ const options:StripeElementsOptions= {
            </div>
         </section>
        
-
+         {/* details the facture */}
       <section className="sm:w-full w-2/5  flex flex-col items-start gap-3 rounded-md border-0 border-sold border-gray-600 p-4 ">
             {/*************************** information the Cart *****8*********************/}
               
@@ -159,7 +172,7 @@ const options:StripeElementsOptions= {
 
                     <ul className="space-y-4 border-0 boredr-solid border-red-700">
                             
-                            { products.map(({title_pro,sizeCart,images,quantityCart },index:number)=>(
+                            {products && products.map(({title_pro,sizeCart,images,quantityCart },index:number)=>(
                                 
                                 <div key={index}  className='flex-col justify-between items-start gap-3 border-0 border-solid border-red-700 ' >
                                     <li className="flex items-start gap-4">

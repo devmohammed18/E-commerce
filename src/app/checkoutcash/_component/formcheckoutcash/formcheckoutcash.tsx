@@ -418,10 +418,12 @@ const  handleSubmit=async(e:React.FormEvent<HTMLFormElement>)=>{
                                 
                       >
                    
-                       {DataFraisLivraison.map((item:string,index:number)=>( 
+                       {Array.isArray(DataFraisLivraison) && DataFraisLivraison.length >0 ?
+                       
+                      ( DataFraisLivraison.map((item:string,index:number)=>( 
                                                                                                                //value={item[parseInt(valueTypeLiveraison) 
                            <option className={`text-xl bg-[var(--secondary-color)] ${index===0?'text-center': 'text-start'}`} key={index}  value={item[1]}>{item[1]}</option>
-                       ))}
+                       ))):( <option disabled>Aucune donnée disponible</option>)}
                
                    </select>
                 
