@@ -73,19 +73,20 @@ export default async function RootLayout({ children, }:
         >
 
 
-          {/* <ClerkLoading>
-            <ProvidreStore>
+          {/* <ClerkLoading> */}
+            {/* <ProvidreStore> */}
 
-                   
-                    <div className="w-full min-h-screen bg-[--secondary-color] opacity-75 absolute top-0 right-0 left-0 bottom-0" >
-                          
-                    
-                    {children}
+            {/* <ProviderGlobal> */}
+                    {/* <div className="w-full min-h-screen bg-[--secondary-color] opacity-75 absolute top-0 right-0 left-0 bottom-0" >
+                           */}
+{/*                     
+                    {children} */}
                           
 
-                    </div>
-            </ProvidreStore> 
-          </ClerkLoading>   */}
+                    {/* </div> */}
+            {/* </ProviderGlobal> */}
+            {/* </ProvidreStore>  */}
+          {/* </ClerkLoading>   */}
 
           {/* <ClerkLoaded>  */}
           <ProvidreStore>

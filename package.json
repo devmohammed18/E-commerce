@@ -21,7 +21,9 @@
     "react-dom": "^19.0.0",
     "react-icons": "^5.4.0",
     "react-redux": "^9.2.0",
-    "stripe": "^17.5.0"
+    "read-excel-file": "^5.8.6",
+    "stripe": "^17.5.0",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

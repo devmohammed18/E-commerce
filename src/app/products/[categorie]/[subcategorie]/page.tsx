@@ -119,7 +119,7 @@ async function Products({params,}:{params:typeParamsCatSub}) {
 
     </div>
     ))}
-</div>
+    </div>
 
   )
 }

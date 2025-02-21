@@ -43,6 +43,21 @@ function BodyCart() {
     
 
   }
+
+  const handleCheckOutCash=()=>{
+      
+    if(!user) {
+   
+       router.push('/sign-in')
+    }else{
+      
+       router.push("/checkoutcash")
+
+     //router.push(`/checkout?amount=${amount}`)
+    }
+   
+
+ }
  
   // const totalAmountCart = products.reduce((acc, product) => acc + (product.quantityCart * product.priceCart), 0);
   // const totalQuantityCart = products.reduce((acc, product) => acc + product.quantityCart, 0);
@@ -65,7 +80,7 @@ function BodyCart() {
   
   return (
     
-    <div className='w-full min-h-screen flex-col  justify-center items-center py-1 space-y-1 mt-[85px] mb-1 bg-[var(--secondry-color)]' >
+    <div className='w-full min-h-screen flex-col border-2 border-solid border-red-800 justify-center items-center py-1 space-y-1 mt-[85px] mb-1 bg-[var(--secondary-color)]' >
     
       <section>
         <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
@@ -84,7 +99,7 @@ function BodyCart() {
             {/*************************** information the Cart *****8*********************/}
               <ul className="space-y-4 border-0 boredr-solid border-red-700">
                
-                { products.map(({id,title_pro,desc_pro,sizeCart,images,priceCart,quantityCart },index:number)=>(
+                { products && products.map(({id,title_pro,desc_pro,sizeCart,images,priceCart,quantityCart },index:number)=>(
                    
                    <div key={index}  className='flex-col justify-between items-start gap-3 border-0 border-solid border-red-700 ' >
                       <li className="flex items-start gap-4">
@@ -195,13 +210,19 @@ function BodyCart() {
                       <p className="whitespace-nowrap text-xs">2 Discounts Applied</p>
                     </span>
                   </div>
-
-                  <div className="flex justify-end">
+                  
+                  <div className=" flex justify-end">
                     <button
                       onClick={()=>{handleCheckOut()}}
-                      className="block rounded bg-gray-700 px-5 py-3 text-sm text-gray-100 transition hover:bg-gray-600"
+                      className="hidden rounded bg-gray-700 px-5 py-3 text-sm text-gray-100 transition hover:bg-gray-600"
                     >
                       Checkout
+                    </button>
+                    <button
+                      onClick={()=>{handleCheckOutCash()} }
+                      className="block rounded bg-gray-700 px-5 py-3 text-sm text-gray-100 transition hover:bg-gray-600"
+                    >
+                      proceed to Checkout
                     </button>
                   </div>
                 </div>

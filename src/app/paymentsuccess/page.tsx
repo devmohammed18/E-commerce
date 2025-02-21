@@ -17,7 +17,7 @@ import { useRouter } from 'next/navigation';
                     <div className='w-14 h-14 border-2 mx-auto flex justify-center items-center border-solid border-[var(--pramiry-color)] rounded-full' >
                       <span className='text-4xl text-green-600 font-bold'><MdDone /></span> 
                     </div>
-                    <h1 className='text-xl font-bold'>payemnt successful !</h1> 
+                    <h1 className='text-xl font-bold'>Merci {user?.firstName} payemnt successful !</h1> 
                     <h1 className='text-md text-slate-600'>we sent an email with your order confirmation along with digital content</h1>
                     <button className=' py-2 px-4 rounded-md bg-green-600 text-[var(--secondary-color)] capitalize '
                        onClick={()=>route.push(`${process.env.NEXT_PUBLIC_URLL}`)}      >go to home</button>
