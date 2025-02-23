@@ -42,10 +42,10 @@ interface typeFormFraisLivraison{
     numberOrder:string,
 }
 
+ 
 
 
-
-function FormFraisLivraison({indexDataFaisLivraison,valueTypeLiveraison ,DataFraisLivraison,convertirFraisLivrisonInumber,handlerList,handlerBtnRadio,frais_livraison,totaleAmountPlusLivraison}:typeFraisLivraison) {
+function FormFraisLivraison({indexDataFaisLivraison,valueTypeLiveraison ,DataFraisLivraison,convertirFraisLivrisonInumber,handlerBtnRadio,handlerList,frais_livraison,totaleAmountPlusLivraison}:typeFraisLivraison) {
  
  
 
@@ -381,6 +381,17 @@ const  handleSubmit=async(e:React.FormEvent<HTMLFormElement>)=>{
 
 }
 
+console.log('DataFraisLivraison=========================>:',DataFraisLivraison)
+if(!DataFraisLivraison || !DataFraisLivraison[0] ){
+
+  return (
+
+      <div className="w-full h-screen flex justify-center items-center">
+        No Delivery Data Available
+      </div>
+  )
+     
+ }
 
  //console.log('dataFromlll:',dataForm)
 
@@ -411,6 +422,7 @@ const  handleSubmit=async(e:React.FormEvent<HTMLFormElement>)=>{
                           onChange={handlerChange} name='email' value={dataForm.email??''} type="text" placeholder="Adress Email"   />
                    
                    {/* *************************** List the wilaya ************************** */}
+                   
                    <select className=" w-full h-10  rounded-md border-2 border-solid border-gray-600 " 
                           //  style={{transition:'max-height 0.3s ease-in-out',maxHeight:'300px',overflowY:'auto'}}
                       

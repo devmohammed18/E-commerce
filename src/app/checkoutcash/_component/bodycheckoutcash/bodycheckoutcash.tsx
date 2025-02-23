@@ -36,16 +36,7 @@ function FraisLivraison({DataFraisLivraison}:{DataFraisLivraison:string[]}) {
     //const [nameTypeLivraison,setNameTypeLivraison]=useState<string>('Livraison au Bureau')
     const {products,totalAmountCart}=useSelector((state:RootState)=>state.cart)
     
-   if(!DataFraisLivraison || !DataFraisLivraison[0]){
-
-    return (
-
-        <div className="w-full h-screen flex justify-center items-center">
-          No Delivery Data Available
-        </div>
-    )
-
-   }
+  
 
     // function for select value the button Radio (type livraison)
     const handlerBtnRadio = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -139,6 +130,19 @@ const options:StripeElementsOptions= {
         amount: 100*100,
        
       };
+
+     
+      
+    //   if(!DataFraisLivraison || !DataFraisLivraison[0] ){
+
+    //     return (
+    
+    //         <div className="w-full h-screen flex justify-center items-center">
+    //           No Delivery Data Available
+    //         </div>
+    //     )
+    
+    //    }
 
     return (
           

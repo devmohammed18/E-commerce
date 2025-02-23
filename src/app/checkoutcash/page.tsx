@@ -5,18 +5,24 @@ import FraisLivraison from "./_component/bodycheckoutcash/bodycheckoutcash"
 const getFraisLivreson= async ()=>{
       
   try{
-     const res=await fetch(`${process.env.NEXT_PUBLIC_URLL}/api/fraisLivraison`)
+     const res=await fetch(`${process.env.NEXT_PUBLIC_URLL}/api/fraisLivraison`,{
+      cache: 'no-store', // ou { next: { revalidate: 0 } } pour Next.js 13+
+      headers: {
+        'Cache-Control': 'no-cache'
+      }
+     })
      const data=await res.json()
      
      if(!data){
       throw new Error(`http//status:${data.status}`)
      }
-
+     
      return data
 
 
   }catch(error){
     console.log(error)
+    return []
   }
 
 }
@@ -24,7 +30,7 @@ async function CheckOutCash() {
 
 
   const DataFraisLivraison:string[]= await getFraisLivreson()
-  console.log(DataFraisLivraison)
+  console.log('Data in Page principle=====>:',DataFraisLivraison)
   
  
   return (
