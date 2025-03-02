@@ -149,7 +149,7 @@ const options:StripeElementsOptions= {
     <div className=" sm:flex sm:flex-col-reverse sm:items-center w-full min-h-screen px-6 flex justify-start items-start gap-3 border-2 border-solid border-red-700 " >
        
          {/* details frais livreson and frais paiement */}
-        <section className=" sm:w-full w-3/5 h-full flex  flex-col justify-start items-start gap-4 border-0 border-solid border-gray-600 p-4 " >
+        <section className=" sm:w-full md:w-1/2  w-3/5 h-full flex  flex-col justify-start items-start gap-4 border-0 border-solid border-gray-600 p-4 " >
             {/*                         title détails de la livraison             */}
            <div className="text-xl pb-3 border-b-2 border-solid border-b-gray-600 capitalize " >delivry details</div>
            {/* Information de client (adress email ,la ville ,...) */}
@@ -167,7 +167,7 @@ const options:StripeElementsOptions= {
         </section>
        
          {/* details the facture */}
-      <section className="sm:w-full w-2/5  flex flex-col items-start gap-3 rounded-md border-0 border-sold border-gray-600 p-4 ">
+      <section className="sm:w-full md:w-1/2 w-2/5  flex flex-col items-start gap-3 rounded-md border-0 border-sold border-gray-600 p-4 ">
             {/*************************** information the Cart *****8*********************/}
               
                 {/*                         title your commande          */}
@@ -181,7 +181,7 @@ const options:StripeElementsOptions= {
                                 <div key={index}  className='flex-col justify-between items-start gap-3 border-0 border-solid border-red-700 ' >
                                     <li className="flex items-start gap-4">
                             {/**************************** image the product ***********************/}
-                                    <div className='w-16 h-16'>
+                                    <div className='w-28 h-24 border-2 border-solid border-red-600'>
                                     <Image
                                         src={images[0].url_image[0].url}
                                         height={100}
@@ -195,9 +195,9 @@ const options:StripeElementsOptions= {
                             {/***************************** information the product ********************/}
                                     <div className=' space-y-5 border-0 border-solid border-red-700' >
                                         {/*                      title the product              */}
-                                        <h3 className="text-xl  text-gray-900">{title_pro}</h3>
+                                        <h3 className="text-gl  text-gray-900">{title_pro}</h3>
                                         {/*     size and price and Quantity the product            */}
-                                        <dl className="text-md mt-0.5 space-y-2  text-gray-600 ">
+                                        <dl className="text-sm mt-0.5 space-y-2  text-gray-600 ">
                                             
                                             <div >
                                             <dt className="inline">Size:</dt>
@@ -206,7 +206,13 @@ const options:StripeElementsOptions= {
 
                                             <div>
                                             <dt className="inline">Price:</dt>
-                                            <dd className="inline">${images[0].price}</dd>
+                                            {images[0].promotion_active && <dd className="inline">${images[0].promotion_price}</dd>}
+                                            <dd className={`inline ${images[0].promotion_active?'line-through text-red-600 ml-2':''}`}>
+                                                <span className="text-gray-600">${images[0].price}</span>
+                                            </dd>
+                                            {images[0].promotion_active && <dd className="inline ml-2">
+                                              <span className="text-green-600"> {images[0].promotion_percentage}% Off</span> 
+                                            </dd>}
                                             </div>
                                             
                                             {/******************************  Button Couter Quantity  ***********************/}
@@ -222,8 +228,8 @@ const options:StripeElementsOptions= {
                                     {/*                    totals amount for each Product            */}
                                     <div className="flex flex-1 items-center justify-end gap-2">
                                     
-                                    <span className='w-7 text-lg font-semibold border-b-2 border-solid border-black ' >
-                                        ${quantityCart*images[0].price}
+                                    <span className='w-7 text-md font-semibold border-b-2 border-solid border-black ' >
+                                        ${quantityCart*(images[0].promotion_active?images[0].promotion_price:images[0].price)}
                                     </span>
 
                                     </div>
@@ -243,29 +249,29 @@ const options:StripeElementsOptions= {
                     {/****************************Total Amount the Cart ********************************/}
                     <div className="mt-8 flex justify-end border-t border-gray-100 pt-8">
                             <div className="w-screen max-w-lg space-y-4">
-                            <dl className="space-y-0.5 text-lg font-semibold text-gray-700">
+                            <dl className="space-y-0.5 text-md font-semibold text-gray-700">
                                 <div className="flex justify-between">
                                 <dt >Subtotal</dt>
                                 <dd>${totalAmountCart}</dd>
                                 </div>
 
-                                <div className="flex justify-between">
+                                {/* <div className="flex justify-between">
                                 <dt>VAT</dt>
                                 <dd>0</dd>
-                                </div>
+                                </div> */}
 
                                 <div className="flex justify-between">
                                 <dt>Livraison</dt>
                                 <dd>${frais_livraison(indexDataFaisLivraison)}</dd>
                                 </div>
                                 
-                                <div className="flex justify-between text-lg font-semibold">
+                                <div className="flex justify-between  text-md font-semibold pb-6 ">
                                 <dt>Total</dt>
                                 <dd>${totaleAmountPlusLivraison(indexDataFaisLivraison)}</dd>
                                 </div>
                             </dl>
   
-                            <div className="flex justify-end">
+                            {/* <div className="flex justify-end">
                                 <span
                                 className="inline-flex items-center justify-center rounded-full bg-indigo-100 px-2.5 py-0.5 text-indigo-700"
                                 >
@@ -286,7 +292,7 @@ const options:StripeElementsOptions= {
 
                                 <p className="whitespace-nowrap text-xs">2 Discounts Applied</p>
                                 </span>
-                            </div>
+                            </div> */}
                             
                             
                             </div>

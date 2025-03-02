@@ -42,7 +42,13 @@ interface typeFormFraisLivraison{
     numberOrder:string,
 }
 
- 
+interface formError{
+
+  ville?:string;
+  adress?:string;
+  telephone?:string;
+
+} 
 
 
 function FormFraisLivraison({indexDataFaisLivraison,valueTypeLiveraison ,DataFraisLivraison,convertirFraisLivrisonInumber,handlerBtnRadio,handlerList,frais_livraison,totaleAmountPlusLivraison}:typeFraisLivraison) {
@@ -56,8 +62,37 @@ function FormFraisLivraison({indexDataFaisLivraison,valueTypeLiveraison ,DataFra
  const elements = useElements();
 const {products,totalAmountCart}=useSelector((state:RootState)=>state.cart)
 
+const [loadingCash,setLoadingCash]=useState<boolean>(false)
 const [modePaiement,setModePaiement]=useState<string>('cash')
+const [errors,setErrors]=useState<formError>({});
 
+
+const validateForm=():boolean=>{
+
+ const newError:formError={}
+  //validate address if delivbry type 4
+ if(valueTypeLiveraison==='4' && !dataForm.adress.trim()){
+  
+  newError.adress='Address is required for home delivery';
+
+ }
+  //validate address
+ if(!dataForm.telephone.trim()){
+
+  newError.telephone='Telephone is required'
+ }else if(!/^\d{10}$/.test(dataForm.telephone.trim())){
+  newError.telephone='Please enter 10-digit phone number'
+ }
+
+ //validate ville
+ if(!dataForm.ville){
+  newError.ville='Please select a city'
+
+ }
+
+ setErrors(newError)
+ return Object.keys(newError).length===0
+}
 
 
 //Mapping data the cart
@@ -72,12 +107,10 @@ const generieNumOrder = () => {
   const random = Math.floor(Math.random() * 1000);
   return `ORD-${timetemp}-${random}`
 }
-
+const [dataForm,setDataForm]=useState<typeFormFraisLivraison>({username:'',email:'',ville:'',typeLivraison:'',telephone:'',adress:'',sousTotal:0,fraisLivraison:0,total:0,typePaiement:'cash',dataCart:dataCart,numberOrder:generieNumOrder()})
  //console.log('numberOrde==========>',generieNumOrder());
  //console.log('dataCart============>',dataCart)
-const [dataForm,setDataForm]=useState<typeFormFraisLivraison>({username:'',email:'',ville:'',typeLivraison:'',telephone:'',adress:'',sousTotal:0,fraisLivraison:0,total:0,typePaiement:'cash',dataCart:dataCart,numberOrder:generieNumOrder()})
 
-const [loadingCash,setLoadingCash]=useState<boolean>(false)
 
 
 
@@ -142,6 +175,12 @@ const handlerChange=(e:React.ChangeEvent<HTMLInputElement|HTMLSelectElement>)=>{
     
        
     const {name,value}=e.target
+
+     // Clear error when user starts typing
+    if (errors[name as keyof formError]) {
+         setErrors(prev => ({...prev, [name]: undefined}))
+      }
+
     const frais=frais_livraison(indexDataFaisLivraison);
     const total=totaleAmountPlusLivraison(indexDataFaisLivraison)
       if(name==='ville' || name==='telephone' || name==='adress'){
@@ -349,6 +388,10 @@ if(!comfirmError){
 const  handleSubmit=async(e:React.FormEvent<HTMLFormElement>)=>{
   e.preventDefault()
 
+  if(!validateForm()){
+    return 
+  }
+
  if(modePaiement==='cash'){
 
   await handlerCashPaiement()
@@ -422,23 +465,24 @@ if(!DataFraisLivraison || !DataFraisLivraison[0] ){
                           onChange={handlerChange} name='email' value={dataForm.email??''} type="text" placeholder="Adress Email"   />
                    
                    {/* *************************** List the wilaya ************************** */}
-                   
-                   <select className=" w-full h-10  rounded-md border-2 border-solid border-gray-600 " 
-                          //  style={{transition:'max-height 0.3s ease-in-out',maxHeight:'300px',overflowY:'auto'}}
+                   <div className='w-full' >
+                      <select className=" w-full h-10  rounded-md border-2 border-solid border-gray-600 " 
+                              //  style={{transition:'max-height 0.3s ease-in-out',maxHeight:'300px',overflowY:'auto'}}
+                          
+                          onChange={(e)=>{handlerChange(e);handlerList(e)}}  name="ville" 
+                                    
+                          >
                       
-                       onChange={(e)=>{handlerChange(e);handlerList(e)}}  name="ville" 
-                                
-                      >
-                   
-                       {Array.isArray(DataFraisLivraison) && DataFraisLivraison.length >0 ?
-                       
-                      ( DataFraisLivraison.map((item:string,index:number)=>( 
-                                                                                                               //value={item[parseInt(valueTypeLiveraison) 
-                           <option className={`text-xl bg-[var(--secondary-color)] ${index===0?'text-center': 'text-start'}`} key={index}  value={item[1]}>{item[1]}</option>
-                       ))):( <option disabled>Aucune donnée disponible</option>)}
-               
-                   </select>
-                
+                          {Array.isArray(DataFraisLivraison) && DataFraisLivraison.length >0 ?
+                          
+                          ( DataFraisLivraison.map((item:string,index:number)=>( 
+                                                                                                                  //value={item[parseInt(valueTypeLiveraison) 
+                              <option className={`text-xl bg-[var(--secondary-color)] ${index===0?'text-center': 'text-start'}`} key={index}  value={item[1]}>{item[1]}</option>
+                          ))):( <option disabled>Aucune donnée disponible</option>)}
+                  
+                      </select>
+                      {errors.ville && <p className='text-red-500 text-sm mt-1' >{errors.ville}</p>}
+                   </div>
                     {/*********************** value the list *********************/}
                    <input className="w-full h-10 border-2 rounded-md border-solid border-gray-600" 
                            onChange={handlerChange} name='ville11' value={dataForm.ville} type="text" placeholder="" />
@@ -455,13 +499,21 @@ if(!DataFraisLivraison || !DataFraisLivraison[0] ){
                            </div>
                    </div> 
                   
-                  {valueTypeLiveraison==="4" && (<input type="text"  onChange={handlerChange}  name='adress' value={dataForm.adress}
+                  {valueTypeLiveraison==="4" && (
+                    <div className='w-full'>
+                      <input type="text"  onChange={handlerChange}  name='adress' value={dataForm.adress}
                          placeholder='Number Rue,Appartemt,code Postal'
                          className="w-full h-10 border-2 border-solid rounded-md border-gray-600" />
-                        
+                    {errors.adress && <p className='text-red-500 text-sm mt-1'>{errors.adress}</p>}
+                    </div>  
                       )}
-                   <input className="w-full h-10 border-2 border-solid rounded-md border-gray-600 mt-2" 
-                          onChange={handlerChange} name='telephone' value={dataForm.telephone} type="text" placeholder="Telephone" />
+
+                    <div className='w-full'>
+                      <input className="w-full h-10 border-2 border-solid rounded-md border-gray-600 mt-2" 
+                            onChange={handlerChange} name='telephone' value={dataForm.telephone} type="text" placeholder="Telephone" />
+                       {errors.telephone && <p className='text-red-500 text-sm mt-1'>{errors.telephone}</p>} 
+                    </div>  
+                  
                   
                       
                  

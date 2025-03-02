@@ -6,17 +6,23 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { addCart } from '@/app/util/redux/reduce'
 import { GlobalContext } from '@/app/util/globalcontext/globalecontext'
+import { useSearchParams } from 'next/navigation'
 function BodyProductDetails({productdetails}:{productdetails:typeProduct} ) {
   
+  const searchParams=useSearchParams();
+  const initialImageIndex=searchParams.get('imageIndex')
+  const [indexColorImage,setIndexColorImage]=useState(initialImageIndex?parseInt(initialImageIndex,10):0) //select la color de product
   const [indexPositionImage,setIndexPositionImage]=useState(0) //select la position de product
-  const [indexColorImage,setIndexColorImage]=useState(0) //select la color de product
-  const [selectColorImage,setSelectImage]=useState<number >(productdetails.images[0].id)
+  
+  const [selectColorImage,setSelectImage]=useState<number >(productdetails.images[indexColorImage].id)
+
   const [indexSize,setIndextSize]=useState<number |null >(null);// selected size 
   const [selectSize,setSelectSize]=useState<string>('')
   const context=useContext(GlobalContext)
   if(!context){
     throw new Error('GlobalContext must be within ProvaderGlobalContext')
   } 
+ 
 
   const {setShowCart,setToggelNav}=context
   const dispatch=useDispatch();  
@@ -51,23 +57,23 @@ function BodyProductDetails({productdetails}:{productdetails:typeProduct} ) {
 
   const selectedColorImage=copieProductdetail.images.filter(
     (image)=>image.id===selectColorImage)  
+  console.log('==========selectedColorImage=====>:',selectedColorImage) 
   // update the sizes ['s','m','l'] this product select by size selected
-   
   
-
-  // const updateColorImage=()=>{
-  //   if(selectedColorImage.length>0){
-  //     console.log(selectedSize)
-  //    selectedColorImage[0].sizes=[{name_size:selectedSize[0].name_size}]
-  //     console.log(productdetails)
-  //   }
-  //  }
  
    // if don t select size 
    const [alertSize,setAlerSize]=useState(false)
     // if don t select Color image
    
-   
+ //retrieve the regular price and promotion price and isPromotion active 
+  const currentImage=productdetails.images[indexColorImage]
+  const regularPrice=currentImage.price
+  const promotionPrice=currentImage.promotion_price;
+  const isPromotionActive=currentImage.promotion_active 
+  
+  console.log('promotionPrice=====',promotionPrice)
+  console.log('isPromotionActive=====',isPromotionActive)
+  console.log('copieProductdetail.priceCart',copieProductdetail.priceCart)
  //Foction Add Product
 
    const addProduct=()=>{
@@ -84,7 +90,7 @@ function BodyProductDetails({productdetails}:{productdetails:typeProduct} ) {
      id:copieProductdetail.id,
      title_pro:copieProductdetail.title_pro,
      desc_pro:copieProductdetail.desc_pro,
-     priceCart:copieProductdetail.priceCart,
+     priceCart:isPromotionActive?promotionPrice:regularPrice ,
      images:selectedColorImage,
      quantityCart:1,
      sizeCart:selectedSize[0].name_size,
@@ -115,11 +121,11 @@ function BodyProductDetails({productdetails}:{productdetails:typeProduct} ) {
            <article className="overflow-hidden sm:flex-col md:flex-col w-full flex justify-center items-start gap-5 rounded-lg border-0 border-green-900 py-3 bg-white shadow-sm">
             {/***************************** Details Images ***************************************/}
            
-            <div className='sm:w-full md:w-full w-2/5 h-full border-0  box-border border-solid border-red-800'>
+            <div className='sm:w-full md:w-full relative w-2/5 h-full border-0  box-border border-solid border-red-800'>
                 
-                <div className='sm:flex-col-reverse  md:flex-col-reverse   w-full h-full flex justify-center gap-4 items-start '>
+                <div className='sm:flex-col-reverse   md:flex-col-reverse   w-full h-full flex justify-center gap-4 items-start '>
                     {/******************** Box small image **********************/}  
-                    <div className='2xl:flex-col 2xl:w-2/12 xl:flex-col xl:w-2/12 lg:flex-col lg:w-2/12 flex justify-start w-full h-full flex-wrap gap-2  ' >
+                    <div className='2xl:flex-col 2xl:w-2/12 xl:flex-col xl:w-2/12 lg:flex-col lg:w-2/12 flex justify-start w-full h-full flex-wrap gap-2 cursor-pointer ' >
                    {/* {productdetails.images[indexColorImage].url_image.map(({url},index)=>( */}
                      {productdetails.images[indexColorImage].url_image.map(({url},index)=>(
                         <div key={index} 
@@ -137,6 +143,7 @@ function BodyProductDetails({productdetails}:{productdetails:typeProduct} ) {
                                 height={100}
                                 className=" h-full w-full rounded-md object-cover"
                                 />
+                               
                         
                         </div>
 
@@ -144,7 +151,7 @@ function BodyProductDetails({productdetails}:{productdetails:typeProduct} ) {
                             }
                     </div>  
                      {/********************* Big image **************************/}
-                    <div className='md:w-full sm:w-full  w-11/12 h-full rounder-xl'>
+                    <div className='relative md:w-full sm:w-full  w-11/12 h-full rounder-xl'>
                         <Image
                             alt="image"
                             src={productdetails.images[indexColorImage]?.url_image[indexPositionImage]?.url}
@@ -153,25 +160,41 @@ function BodyProductDetails({productdetails}:{productdetails:typeProduct} ) {
                             height={1000}
                             className="h-full w-full object-cover rounded-xl"
                             />
+
+                       
                     </div>
                 </div>
-
+                
             </div>
 
 
             {/**************************** Details Information the Products  ******************************/}
            
-            <div className="sm:w-full md:w-full p-4 w-2/5 h-full flex-col items-start justify-center space-y-4 border-0 border-solid border-red-800">
+            <div className="sm:w-full   md:w-full p-4 w-2/5 h-full flex-col items-start justify-center space-y-4  border-2 border-solid border-red-800">
                     {/***********************  title The Product *******************/}
-                    <h3 className="text-lg font-medium text-gray-900">
+                    <h3 className="text-xl font-bold text-gray-900 ">
                        {productdetails.title_pro}
                     </h3>
                    
                     {/***********************  Price The Product *******************/}
-                    { productdetails.images.map(({price,},index:number)=>(
-                        <h3 key={index} className="text-lg font-bold text-red-800">
-                             {indexColorImage===index?`${price} $`:''} 
-                        </h3>
+                   
+                    { productdetails.images.map(({price,promotion_price,promotion_percentage,promotion_active},index:number)=>(
+                       <dl className='inline' key={index}>
+                       <div  className='flex items-start' >
+                           <dt className="sr-only">Price</dt>
+                            {promotion_active && <dd  className={`text-lg font-bold`}>
+                                {indexColorImage===index?`${promotion_price} $`:''} 
+                            </dd>}
+                            <dd  className={`text-lg font-bold ${promotion_active?'line-through text-red-600 ml-4':''} text-red-800`}>
+                                <span className='text-gray-600'>{indexColorImage===index?`${price} $`:''} </span>
+                            </dd>
+
+                            {promotion_active && <dd  className={`text-lg font-medium text-green-600 ml-10`}>
+                                {indexColorImage===index?`${promotion_percentage}% Off`:''} 
+                            </dd>}
+
+                        </div>
+                        </dl>  
                     ))
                     }
 
@@ -189,7 +212,7 @@ function BodyProductDetails({productdetails}:{productdetails:typeProduct} ) {
  
                          <div key={index} 
                               onClick={()=>{setIndexColorImage(index);setSelectImage(id);setIndexPositionImage(0)}}
-                              className='w-20 h-24 rounded-md border border-solid border-[var(--secondary-color)] hover:border-[--primary-color]  '
+                              className='w-20 h-24 rounded-md border border-solid border-[var(--secondary-color)] hover:border-[--primary-color] cursor-pointer '
                               style={{border:indexColorImage===index?'2px solid var(--primary-color)':''}}
                           >
                         
@@ -198,9 +221,7 @@ function BodyProductDetails({productdetails}:{productdetails:typeProduct} ) {
                              src={ url_image[0].url}
                              width={100}
                              height={100}
-                             className="h-full w-full object-cover rounded-md 
-                            "
-                             />
+                             className="h-full w-full object-cover rounded-md"/>
                           </div>
  
                        ))
@@ -212,7 +233,7 @@ function BodyProductDetails({productdetails}:{productdetails:typeProduct} ) {
                     {/************************** Sizes the Poducts  *******************/}
                     {/* className='w-full h-full flex justify-start items-center flex-wrap gap-x-4 gap-y-2 border-2 my-2 border-solid border-black' */}
                     
-                    <div  className='sm:grid-cols-3 md:grid-cols-5  w-full h-full grid grid-cols-4 gap-2  border-2 my-2 border-solid border-black '>
+                    <div  className='sm:grid-cols-3 md:grid-cols-5  w-full h-full grid grid-cols-4 gap-2  border-2 my-2 border-solid border-black cursor-pointer '>
                         {productdetails.images[indexColorImage].sizes.map(({name_size},index)=>(
                             <div key={index} onClick={()=>{setIndextSize(index);setSelectSize(name_size)}} className='w-full h-10 flex justify-center  items-center border border-solid border-[var(--secondary-color)] rounded-lg hover:border-[var(--primary-color)]'
                              style={{border:indexSize===index?'2px solid var(--primary-color)':''}} >

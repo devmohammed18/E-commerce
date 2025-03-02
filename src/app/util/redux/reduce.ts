@@ -61,8 +61,10 @@ export const cartSlice = createSlice({
             }   
 
       }
-      localStorage.setItem('products',JSON.stringify(state.products))
 
+      console.log('state.products======================',state.products)
+      localStorage.setItem('products',JSON.stringify(state.products))
+     
           //update the totalQuantityCart
           //  state.totalQuantityCart=state.products.reduce((total,itemProducts)=>
           // { return total+=itemProducts.quantityCart},0) 
@@ -129,7 +131,8 @@ export const cartSlice = createSlice({
     //calcul the totalAmountCart
     getTotalsAmount:(state)=>{
       state.totalAmountCart=state.products.reduce((total,itemProduct)=>{
-      return total+=itemProduct.quantityCart*itemProduct.images[0].price
+      return total+=itemProduct.quantityCart*
+      (itemProduct.images[0].promotion_active?itemProduct.images[0].promotion_price :itemProduct.images[0].price)
       },0)
 
     },

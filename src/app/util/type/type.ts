@@ -9,7 +9,7 @@ export interface typeCartState {
 /************************* type Products**************************************** */
 export interface typeProduct{
     id:number,
-    images:{id:number,url_image:{url:string}[],sizes:[{name_size:string}],price:number,}[],
+    images:{id:number,url_image:{url:string}[],sizes:[{name_size:string}],price:number,promotion_percentage:number,promotion_price:number,promotion_active:boolean}[],
     title_pro:string,
     desc_pro:string,
     priceCart:number,

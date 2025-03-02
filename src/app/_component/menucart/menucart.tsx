@@ -16,7 +16,7 @@ function MenuCart() {
   
   const {products,totalQuantityCart}=useSelector((state:RootState)=>state.cart)
   const dispatch=useDispatch()
-  console.log(products)
+  console.log('Cart :',products)
  
  const context=useContext(GlobalContext)
    if(!context){
@@ -43,7 +43,7 @@ function MenuCart() {
 
 // 
   return (
-    <div className={`sm:w-full h-[calc(100%-80px)]  sm:top-[80px] md:w-full md:top-[80px] 
+    <div className={`z-30 sm:w-full h-[calc(100%-80px)]  sm:top-[80px] md:w-full md:top-[80px] 
                 fixed top-[80px]  box-border  flex justify-center  ${showCart?'right-0':'-right-[1000px]' } transition-all ease-linear duration-500 border-2 border-solid border-gray-600`} >
         
        <div className="sm:max-w-full h-full overflow-auto md:max-w-full z-40 relative w-screen max-w-sm border border-gray-600 bg-gray-100 px-4 py-8  lg:px-8"
@@ -99,10 +99,13 @@ function MenuCart() {
                                 <dt className="inline">Size:</dt>
                                 <dd className="inline">{sizeCart}</dd>
                                 </div>
-
+                       {/********************************** Price the product ****************************  */}
                                 <div>
-                                <dt className="inline">Price:</dt>
-                                <dd className="inline">{images[0]?.price}</dd>
+
+                                    <dt className="inline">Price:</dt>
+                                    {images[0].promotion_active && <dd className="inline">${priceCart}</dd>}
+                                    <dd className={`inline ${images[0].promotion_active?'line-through ml-2':''} `}>${images[0]?.price}</dd>
+
                                 </div>
                             </dl>
                             </div>

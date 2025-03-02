@@ -27,7 +27,7 @@ function BodyCart() {
 
   const {setDisableFaShoppingCart}=context
   
-
+ 
 
   const handleCheckOut=()=>{
       
@@ -43,6 +43,8 @@ function BodyCart() {
     
 
   }
+
+
 
   const handleCheckOutCash=()=>{
       
@@ -80,7 +82,7 @@ function BodyCart() {
   
   return (
     
-    <div className='w-full min-h-screen flex-col border-2 border-solid border-red-800 justify-center items-center py-1 space-y-1 mt-[85px] mb-1 bg-[var(--secondary-color)]' >
+    <div className='z-40 w-full min-h-screen flex-col border-2 border-solid border-red-800 justify-center items-center py-1 space-y-1 mt-[85px] mb-1 bg-[var(--secondary-color)]' >
     
       <section>
         <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
@@ -129,10 +131,12 @@ function BodyCart() {
 
                               <div>
                                 <dt className="inline">Price:</dt>
-                                <dd className="inline">${images[0].price}</dd>
+                                {images[0].promotion_active && <dd className="inline">${images[0].promotion_price }</dd>}
+                                <dd className={`inline ${images[0].promotion_active?'line-through ml-2 text-red-600 ':''}`}><span className='text-gray-600'>${images[0].price}</span></dd>
+                                
                               </div>
                               
-                                {/******************************  Button Couter Quantity  ***********************/}
+                                {/******************************  Button Counter Quantity  ***********************/}
                               
                               <div className='w-max'>
                                  <BtncounterQuantity width={35} height={30} id={id} title_pro={title_pro} desc_pro={desc_pro} images={images} priceCart={priceCart} sizeCart={sizeCart} quantityCart={quantityCart} />
@@ -146,7 +150,7 @@ function BodyCart() {
                       <div className="flex flex-1 items-center justify-end gap-2">
                        
                         <span className='w-7 text-lg font-semibold border-b-2 border-solid border-black ' >
-                          ${quantityCart*images[0].price}
+                          ${quantityCart * (images[0].promotion_active?images[0].promotion_price:images[0].price)}
                         </span>
 
                       </div>
@@ -177,19 +181,20 @@ function BodyCart() {
                       <dd>0</dd>
                     </div>
 
-                    <div className="flex justify-between">
+                    {/* <div className="flex justify-between">
                       <dt>Discount</dt>
                       <dd>0</dd>
-                    </div>
+                    </div> */}
                      
-                    <div className="flex justify-between text-lg font-semibold">
+                    <div className="flex justify-between text-lg font-bold pt-2">
                       <dt>Total</dt>
                       <dd>{totalAmountCart}</dd>
                     </div>
                   </dl>
 
                   <div className="flex justify-end">
-                    <span
+
+                    {/* <span
                       className="inline-flex items-center justify-center rounded-full bg-indigo-100 px-2.5 py-0.5 text-indigo-700"
                     >
                       <svg
@@ -208,7 +213,8 @@ function BodyCart() {
                       </svg>
 
                       <p className="whitespace-nowrap text-xs">2 Discounts Applied</p>
-                    </span>
+                    </span> */}
+
                   </div>
                   
                   <div className=" flex justify-end">
