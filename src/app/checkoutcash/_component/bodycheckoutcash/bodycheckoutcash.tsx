@@ -149,7 +149,7 @@ const options:StripeElementsOptions= {
     <div className=" sm:flex sm:flex-col-reverse sm:items-center w-full min-h-screen px-6 flex justify-start items-start gap-3 border-2 border-solid border-red-700 " >
        
          {/* details frais livreson and frais paiement */}
-        <section className=" sm:w-full md:w-1/2  w-3/5 h-full flex  flex-col justify-start items-start gap-4 border-0 border-solid border-gray-600 p-4 " >
+        <section className=" sm:w-full sm:p-0 md:w-1/2  w-3/5 h-full flex  flex-col justify-start items-start gap-4 border-0 border-solid border-gray-600 p-4 " >
             {/*                         title détails de la livraison             */}
            <div className="text-xl pb-3 border-b-2 border-solid border-b-gray-600 capitalize " >delivry details</div>
            {/* Information de client (adress email ,la ville ,...) */}
@@ -167,12 +167,12 @@ const options:StripeElementsOptions= {
         </section>
        
          {/* details the facture */}
-      <section className="sm:w-full md:w-1/2 w-2/5  flex flex-col items-start gap-3 rounded-md border-0 border-sold border-gray-600 p-4 ">
+      <section className="sm:w-full sm:p-0 md:w-1/2 w-2/5  flex flex-col items-start gap-3 rounded-md border-0 border-sold border-gray-600 p-4 ">
             {/*************************** information the Cart *****8*********************/}
               
                 {/*                         title your commande          */}
                <div className="text-xl pb-3 border-b-2 border-solid border-b-gray-600 capitalize " >your commande</div>
-               <div className="w-full p-4 rounded-md border border-sold border-gray-600   ">
+               <div className="sm:p-0 sm:border-0 w-full p-4 rounded-md border border-sold border-gray-600   ">
 
                     <ul className="space-y-4 border-0 boredr-solid border-red-700">
                             
@@ -181,7 +181,7 @@ const options:StripeElementsOptions= {
                                 <div key={index}  className='flex-col justify-between items-start gap-3 border-0 border-solid border-red-700 ' >
                                     <li className="flex items-start gap-4">
                             {/**************************** image the product ***********************/}
-                                    <div className='w-28 h-24 border-2 border-solid border-red-600'>
+                                    <div className='w-28 h-28 border-0 border-solid border-red-600'>
                                     <Image
                                         src={images[0].url_image[0].url}
                                         height={100}
@@ -193,9 +193,9 @@ const options:StripeElementsOptions= {
                                     </div>
 
                             {/***************************** information the product ********************/}
-                                    <div className=' space-y-5 border-0 border-solid border-red-700' >
+                                    <div className=' space-y-2 border-0 border-solid border-red-700' >
                                         {/*                      title the product              */}
-                                        <h3 className="text-gl  text-gray-900">{title_pro}</h3>
+                                        <h3 className="sm:text-md text-lg  text-gray-900">{title_pro}</h3>
                                         {/*     size and price and Quantity the product            */}
                                         <dl className="text-sm mt-0.5 space-y-2  text-gray-600 ">
                                             
@@ -203,7 +203,7 @@ const options:StripeElementsOptions= {
                                             <dt className="inline">Size:</dt>
                                             <dd className="inline">{sizeCart}</dd>
                                             </div>
-
+                                         {/*             Price(regulary or with promation) the product              */}
                                             <div>
                                             <dt className="inline">Price:</dt>
                                             {images[0].promotion_active && <dd className="inline">${images[0].promotion_price}</dd>}
@@ -228,7 +228,7 @@ const options:StripeElementsOptions= {
                                     {/*                    totals amount for each Product            */}
                                     <div className="flex flex-1 items-center justify-end gap-2">
                                     
-                                    <span className='w-7 text-md font-semibold border-b-2 border-solid border-black ' >
+                                    <span className='w-7 text-md font-semibold border-b-2 border-solid border-black' >
                                         ${quantityCart*(images[0].promotion_active?images[0].promotion_price:images[0].price)}
                                     </span>
 
@@ -252,7 +252,7 @@ const options:StripeElementsOptions= {
                             <dl className="space-y-0.5 text-md font-semibold text-gray-700">
                                 <div className="flex justify-between">
                                 <dt >Subtotal</dt>
-                                <dd>${totalAmountCart}</dd>
+                                <dd className="text-black ">${totalAmountCart}</dd>
                                 </div>
 
                                 {/* <div className="flex justify-between">
@@ -262,12 +262,12 @@ const options:StripeElementsOptions= {
 
                                 <div className="flex justify-between">
                                 <dt>Livraison</dt>
-                                <dd>${frais_livraison(indexDataFaisLivraison)}</dd>
+                                <dd className=" text-black ">${frais_livraison(indexDataFaisLivraison)}</dd>
                                 </div>
                                 
-                                <div className="flex justify-between  text-md font-semibold pb-6 ">
+                                <div className="flex justify-between text-md">
                                 <dt>Total</dt>
-                                <dd>${totaleAmountPlusLivraison(indexDataFaisLivraison)}</dd>
+                                <dd className="text-black ">${totaleAmountPlusLivraison(indexDataFaisLivraison)}</dd>
                                 </div>
                             </dl>
   

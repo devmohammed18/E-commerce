@@ -118,11 +118,11 @@ function BodyCart() {
                       </div>
 
                {/***************************** information the product ********************/}
-                      <div className=' space-y-5 border-0 border-solid border-red-700' >
+                      <div className=' space-y-2 border-0 border-solid border-red-700' >
                           {/*                      title the product              */}
-                          <h3 className="text-2xl  text-gray-900">{title_pro}</h3>
+                          <h3 className="sm:text-lg text-2xl font-bold text-gray-900">{title_pro}</h3>
                           {/*     size and price and Quantity the product            */}
-                          <dl className="text-lg mt-0.5 space-y-2  text-gray-600 ">
+                          <dl className="sm:text-md text-lg mt-0.5 space-y-2  text-gray-600 ">
                               
                               <div >
                                 <dt className="inline">Size:</dt>
@@ -178,7 +178,7 @@ function BodyCart() {
 
                     <div className="flex justify-between">
                       <dt>VAT</dt>
-                      <dd>0</dd>
+                      <dd>$0</dd>
                     </div>
 
                     {/* <div className="flex justify-between">
@@ -188,7 +188,7 @@ function BodyCart() {
                      
                     <div className="flex justify-between text-lg font-bold pt-2">
                       <dt>Total</dt>
-                      <dd>{totalAmountCart}</dd>
+                      <dd>${totalAmountCart}</dd>
                     </div>
                   </dl>
 
