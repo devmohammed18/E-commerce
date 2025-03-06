@@ -1,10 +1,10 @@
 
 
-import Link from 'next/link';
-import Image from 'next/image';
+
 import { typeProduct } from '@/app/util/type/type';
 // import { axiosGet } from '@/app/util/fetchApi/axiosGet';
 
+import BodyBanner from './bodybanner';
 
 const getProducts = async () => {
 
@@ -79,79 +79,22 @@ async function Banner() {
           </div>
         </div>
       </section>
-      <div className='border-0 border-solid border-red-800 py-2 text-xl  '>All Procuct : </div>
-      <div className='w-full min-h-screen mt-[10px] mb- p-6 flex flex-wrap justify-around gap-y-5 items-center bg-white border border-solid border-black  '>
+      {/* <div className='border-0 border-solid border-red-800 py-2 text-xl  '>All Procuct : </div> */}
+      <div className=" w-full ">
+          <h1 className="w-max text-lg text-var(--primary-color) font-semibold py-2 ml-6  border-b-2 border-solid border-black ">all products : </h1>
+        </div>
+      
 
         {/* <h1>Product{categorie}</h1> */}
 
         {/* //    {/*************************************** cards The products **************************/}
-        {products && products.map(({ id, title_pro, images }: typeProduct, index: number) => (
 
+     <BodyBanner products={products}/>
+       
+       
+       
+       
 
-          <div className='sm:w-full w-72 h-full border-0 border-solid border-red-900' key={index}>
-
-            <Link href={`/productdetails/${id} `} className=" sm:w-full block rounded-lg p-4 shadow-sm shadow-indigo-100 border hover:shadow-md hover:border hover:border-solid hover:border-indigo-300 hover:rounded-lg ">
-              {/* ********************   big image Cart Product ******************** */}
-              <div className='w-full h-full box-border'>
-
-
-
-
-                {images && images.length > 0 && images[0]?.url_image[0]?.url ?
-
-
-                  (<Image
-                    alt="image"
-                    src={images[0].url_image[0].url} width={1000} height={1000}
-                    className=" sm:w-80 sm:h-full  h-72 w-full rounded-md object-cover"
-                  />)
-
-
-                  : (<div className="w-full h-80 bg-gray-200 " >
-                    <span>Image Available</span>
-                  </div>)}
-
-              </div>
-
-              {/************************Details Cart Product **************************/}
-              <div className="mt-2">
-
-                <dl>
-                  <div>
-                    <dt className="sr-only">Price</dt>
-                    {/* <dd className="text-sm text-gray-500">${images[0].price}</dd> */}
-                  </div>
-
-                  <div>
-                    <dt className="sr-only">title de produit</dt>
-                    <dd className="font-medium">{title_pro}</dd>
-                  </div>
-                </dl>
-
-                <div className=" mt-3 flex items-center gap-2 text-xs">
-
-
-                  {images.map(({ url_image }, index: number) => (
-                    <div
-                      //  onClick={()=>setIdImage(index)} 
-
-                      key={index}
-                      className="w-20 h-24  sm:inline-flex sm:shrink-0 sm:items-center sm:gap-2">
-                      <Image
-                        alt=""
-                        src={url_image[0].url} width={80} height={80}
-                        className="h-full w-full rounded-md object-cover"
-                      />
-                    </div>
-                  ))}
-                </div>
-
-              </div>
-            </Link>
-
-          </div>
-        ))}
-      </div>
     </div>
   )
 }

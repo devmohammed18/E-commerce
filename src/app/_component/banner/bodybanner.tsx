@@ -5,7 +5,7 @@ import Image from "next/image"
 import Link from "next/link"
 import {  useState } from "react"
 
-function BodyProducts({products}:{products:typeProduct[]|undefined}) {
+function BodyBanner({products}:{products:typeProduct[]|undefined}) {
   
    const [selectImage,setSelectImage]=useState<{[key:number]:number}>({})
    
@@ -28,7 +28,7 @@ function BodyProducts({products}:{products:typeProduct[]|undefined}) {
     
 
   return (
-    <div className="w-full min-h-screen mt-[10px] mb-1 p-6 flex flex-wrap justify-around gap-y-5 gap-x-6 items-center bg-white border border-solid border-black">
+    <div className="w-full min-h-screen mt-[10px] mb-1 p-6 flex flex-wrap justify-between gap-y-5 gap-x-3 items-center bg-white border border-solid border-black">
           {/* //    {/*************************************** cards The products **************************/}
     {products && products.map(({id,title_pro,images}:typeProduct,productsIndex:number)=>{
       
@@ -40,6 +40,9 @@ function BodyProducts({products}:{products:typeProduct[]|undefined}) {
               {/* ********************   big image Cart Product ******************** */}
               <div className='relative w-full h-full box-border'> 
               
+  
+             
+                  
                    {images && images.length>0 && images[CurrentSelectIndex]?.url_image[0]?.url ?
                      
                       
@@ -71,11 +74,13 @@ function BodyProducts({products}:{products:typeProduct[]|undefined}) {
                          
                     
                          return(<div
-                      
+                        
+                         
+                         
                            key={imgIndex} 
                            onClick={(e)=>{showImageSelected(e,productsIndex,imgIndex)}} 
                            onMouseMove={(e)=>{showImageSelected(e,productsIndex,imgIndex)}}
-                           className="w-10 h-12  sm:inline-flex sm:shrink-0 sm:items-center sm:gap-2">
+                         className="w-10 h-12  sm:inline-flex sm:shrink-0 sm:items-center sm:gap-2">
                               <Image
                               alt={`Miniature ${imgIndex}`}
                               src={url_image[0].url} width={80} height={80}
@@ -114,4 +119,4 @@ function BodyProducts({products}:{products:typeProduct[]|undefined}) {
   )
 }
 
-export default BodyProducts
+export default BodyBanner

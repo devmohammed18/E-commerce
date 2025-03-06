@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux'
 import { addCart } from '@/app/util/redux/reduce'
 import { GlobalContext } from '@/app/util/globalcontext/globalecontext'
 import { useSearchParams } from 'next/navigation'
+import ProductsDetailsSkeleton from './productsDetailsSkeleton'
 function BodyProductDetails({productdetails}:{productdetails:typeProduct} ) {
   
   const searchParams=useSearchParams();
@@ -28,7 +29,7 @@ function BodyProductDetails({productdetails}:{productdetails:typeProduct} ) {
   const dispatch=useDispatch();  
   
   // retrieve all sizes the product this Color
-
+ 
   const [copieProductdetail,setCopieProductDetail]=useState<typeProduct>(
     
     {id:0,
@@ -39,13 +40,14 @@ function BodyProductDetails({productdetails}:{productdetails:typeProduct} ) {
     quantityCart:1}
 
   )
- 
+  
   useEffect(()=>{
     setCopieProductDetail(productdetails)
 
     console.log(copieProductdetail)
    },[indexColorImage])
 
+  
   const selectSizes=copieProductdetail.images[indexColorImage]?.sizes || []
   
   // retrieve Size the product selected
@@ -74,7 +76,12 @@ function BodyProductDetails({productdetails}:{productdetails:typeProduct} ) {
   console.log('promotionPrice=====',promotionPrice)
   console.log('isPromotionActive=====',isPromotionActive)
   console.log('copieProductdetail.priceCart',copieProductdetail.priceCart)
- //Foction Add Product
+  
+  if(!productdetails){
+    return(<ProductsDetailsSkeleton />)
+   }
+
+  //Foction Add Product
 
    const addProduct=()=>{
    if (selectedSize.length>0 ){
@@ -113,6 +120,8 @@ function BodyProductDetails({productdetails}:{productdetails:typeProduct} ) {
 
    }
  
+
+   
  
  
   return (
@@ -170,7 +179,7 @@ function BodyProductDetails({productdetails}:{productdetails:typeProduct} ) {
 
             {/**************************** Details Information the Products  ******************************/}
            
-            <div className="sm:w-full   md:w-full p-4 w-2/5 h-full flex-col items-start justify-center space-y-4  border-2 border-solid border-red-800">
+            <div className="sm:w-full   md:w-full p-4 w-2/5 h-full flex-col items-start justify-center space-y-4  border-0 border-solid border-red-800">
                     {/***********************  title The Product *******************/}
                     <h3 className="text-xl font-bold text-gray-900 ">
                        {productdetails.title_pro}
@@ -233,7 +242,7 @@ function BodyProductDetails({productdetails}:{productdetails:typeProduct} ) {
                     {/************************** Sizes the Poducts  *******************/}
                     {/* className='w-full h-full flex justify-start items-center flex-wrap gap-x-4 gap-y-2 border-2 my-2 border-solid border-black' */}
                     
-                    <div  className='sm:grid-cols-3 md:grid-cols-5  w-full h-full grid grid-cols-4 gap-2  border-2 my-2 border-solid border-black cursor-pointer '>
+                    <div  className='sm:grid-cols-3 md:grid-cols-5 p-2  w-full h-full grid grid-cols-4 gap-2  border rounded-md my-2 border-solid border-gray-300 cursor-pointer '>
                         {productdetails.images[indexColorImage].sizes.map(({name_size},index)=>(
                             <div key={index} onClick={()=>{setIndextSize(index);setSelectSize(name_size)}} className='w-full h-10 flex justify-center  items-center border border-solid border-[var(--secondary-color)] rounded-lg hover:border-[var(--primary-color)]'
                              style={{border:indexSize===index?'2px solid var(--primary-color)':''}} >

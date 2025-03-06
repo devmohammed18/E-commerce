@@ -2,6 +2,10 @@
 import { typeProduct } from '@/app/util/type/type';
 import BodyProductDetails from './_component/bodyProducts';
 import { Suspense } from 'react';
+import ProductsDetailsSkeleton from './_component/productsDetailsSkeleton';
+
+
+
 // type params
 type typeParams=Promise<{id:number}>
 
@@ -19,11 +23,15 @@ type typeParams=Promise<{id:number}>
 //     return productDetails
 // }
 
+// Fonction pour simuler un délai
+//const delay = (ms: number): Promise<void> =>{return new Promise<void>(resolve =>setTimeout(()=>{resolve()}, ms))}; 
+ //const delay = (ms:number):Promise<void> => new Promise<void>(resolve => setTimeout(resolve, ms))
 
- async function  ProductDetalis({params}:{params:typeParams}) {
+async function  ProductDetalis({params}:{params:typeParams}) {
     
     const id=(await params).id
      console.log('idddddddddddd',id)
+     
    
      const res=await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products?filters[id][$eq]=${id}&populate[images][populate]=*`,
         {headers:{
@@ -33,11 +41,11 @@ type typeParams=Promise<{id:number}>
      const data=await res.json();
     
      const productdetails:typeProduct=data.data[0]
-
+     //await delay(300)
   return (
-    <Suspense fallback={<h2>🌀 Loading...</h2>} >
+    <Suspense fallback={<ProductsDetailsSkeleton />} >
     <div className='  w-full min-h-screen flex-col  justify-center items-center py-1 space-y-1 mt-[85px] mb-1 bg-[var(--secondry-color)]'>
-    
+     
        <BodyProductDetails productdetails={productdetails} />
  
     </div>

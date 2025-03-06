@@ -1,10 +1,12 @@
 
 import { typeCategorie, typeProduct, typeSubCategorie } from "@/app/util/type/type"
 import BodyProducts from "./_component/smallimage/bodyProducts"
+import { Suspense } from "react"
 
 
-type typeParamsCatSub=Promise<{categorie:typeCategorie,subcategorie:typeSubCategorie}>
 
+//typeParamsCatSub=Promise<{categorie:typeCategorie,subcategorie:typeSubCategorie}>
+type typeParamsCatSub={categorie:typeCategorie,subcategorie:typeSubCategorie}
 const getProducts=async(categorie:typeCategorie,subcategorie:typeSubCategorie)=>{
  
     try{
@@ -38,24 +40,28 @@ const getProducts=async(categorie:typeCategorie,subcategorie:typeSubCategorie)=>
 }
 
 async function Products({params}:{params:typeParamsCatSub}) {
-   
-   const categorie=(await params).categorie
-   const subcategorie=(await params).subcategorie
-    console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
-    console.log(categorie)
-    console.log(subcategorie)
-    console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
+   const {categorie,subcategorie}=params;
+ //  const {categorie,subcategorie}=(await params)
+//    const subcategorie=(await params).subcategorie
+//     console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
+//     console.log(categorie)
+//     console.log(subcategorie)
+//     console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
   
     const products=await getProducts(categorie,subcategorie);
     
   return (
-    <div className='w-full min-h-screen mt-[60px] mb-1 p-6 flex flex-wrap justify-around gap-y-5 items-center bg-white border border-solid border-black  '>
-      
-        {/* <h1>Product{categorie}</h1> */}
+    <Suspense fallback={<h1 className="text-3xl mt-[70px] ">loading.....</h1>} >
+    <div className='w-full min-h-screen mt-[60px] mb-1 p-6 flex flex-wrap justify-around gap-y-2 items-center bg-white border border-solid border-black  '>
+        <div className=" w-full">
+          <h1 className="w-max text-lg text-var(--primary-color) font-semibold py-2  border-b-2 border-solid border-black ">{subcategorie.toString()} for {categorie.toString()} : </h1>
+        </div>
+       
+       
          <BodyProducts products={products} />
-    
+         
     </div>
-
+    </Suspense>
   )
 }
 
