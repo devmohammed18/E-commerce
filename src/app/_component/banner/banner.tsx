@@ -5,6 +5,7 @@ import { typeProduct } from '@/app/util/type/type';
 // import { axiosGet } from '@/app/util/fetchApi/axiosGet';
 
 import BodyBanner from './bodybanner';
+import NavBarController from './navBarController';
 
 const getProducts = async () => {
 
@@ -44,7 +45,7 @@ async function Banner() {
 
   return (
     <div className='min-h-screen box-border ' >
-
+      <NavBarController />
       <section className="h-full bg-slate-700  text-white">
         <div className="mx-auto max-w-screen-xl px-4 py-32 lg:flex lg:h-screen lg:items-center">
           <div className="mx-auto max-w-3xl text-center">

@@ -12,6 +12,8 @@ function ProviderGlobal({ children }: typeChildren) {
 
     const [showCart, setShowCart] = useState<boolean>(false)// show catr 
     const [toggelNav, setToggelNav] = useState<boolean>(false)// close and show navbar
+    
+    const [isShowProducts,setIsShowProducts]=useState<boolean>(false)
 
     const [toggelSub, setToggelSub] = useState<boolean>(false)// show list subcategorie
     const [titleCat, setTitleCat] = useState<string>("")// title Categorie
@@ -19,7 +21,7 @@ function ProviderGlobal({ children }: typeChildren) {
     const [disCounterQuantity,setDisCounterQuantite]=useState<boolean>(false)//
     return (
         <GlobalContext.Provider 
-        value={{ showCart, setShowCart, toggelNav, setToggelNav, toggelSub, setToggelSub,titleCat,setTitleCat,disableFaShoppingCart,setDisableFaShoppingCart,disCounterQuantity,setDisCounterQuantite }} >
+        value={{ showCart, setShowCart, toggelNav, setToggelNav, toggelSub, setToggelSub,titleCat,setTitleCat,disableFaShoppingCart,setDisableFaShoppingCart,disCounterQuantity,setDisCounterQuantite,isShowProducts,setIsShowProducts }} >
             <div>
                 {children}
             </div>

@@ -1,18 +1,20 @@
 'use client'
 // import { usefetch } from "@/app/util/fetchApi/useFetch"
 // import ProductContex from "@/app/util/hooks/productContext"
-import Link from "next/link"
+//import Link from "next/link"
 import { Dispatch, SetStateAction, useContext } from "react"
 import { typeSubCategorie } from "@/app/util/type/type"
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 
 import { GlobalContext } from "@/app/util/globalcontext/globalecontext";
-export default function SubCategories({ title_cat, subCategories, setShowList }:
+import { useRouter } from "next/navigation";
+//setShowList
+export default function SubCategories({ title_cat, subCategories,  }:
     { title_cat: string, subCategories: [string, typeSubCategorie[]][], setShowList: Dispatch<SetStateAction<boolean>> }) {
 
     // const [titleSub,setTitleSub]=useState<>("")
-
+    const router=useRouter()
     const context = useContext(GlobalContext)
 
     if (!context) {
@@ -22,10 +24,20 @@ export default function SubCategories({ title_cat, subCategories, setShowList }:
     if (!title_cat) {
         return null
     }
-
-    const { setToggelSub, toggelSub, setToggelNav } = context
-
-
+   //setToggelNav
+    const { setToggelSub, toggelSub,setToggelNav  } = context
+   
+    const handleSubCategorieClick=(e:React.MouseEvent<HTMLDivElement,MouseEvent>,title_cat:string,title_sub :string)=>{
+        e.preventDefault()
+        router.push(`/products/${title_cat}/${title_sub} `)
+        // setTimeout(()=>{ 
+             
+        //    },100)
+           // setShowList(false);
+          //  setToggelSub(false)
+           setToggelNav(false); 
+       
+    }
 
     //   const handelApi=(e:React.MouseEvent,filter:string)=>{
 
@@ -83,12 +95,19 @@ export default function SubCategories({ title_cat, subCategories, setShowList }:
                                         flex justify-between items-center"
                                         >
                                         {/* handelApi(e,`products?populate[images][populate]=*&filters[categories][title_cat][$eq]=${title_cat}&filters[subcategories][title_sub][$eq]=${title_sub}`), */}
-                                        <Link
+                                        <div
+                                          
+                                            className="cursor-pointer w-full " 
+                                            onClick={(e) => {handleSubCategorieClick(e,title_cat,title_sub) }}>
+                                            {title_sub}
+                                        </div> 
+
+                                        {/* <Link
                                             href={`/products/${title_cat}/${title_sub} `}
                                             className="cursor-pointer w-full " 
                                             onClick={() => { setShowList(false); setToggelNav(false); setToggelSub(false) }}>
                                             {title_sub}
-                                        </Link>
+                                        </Link> */}
                                         <span className="hidden sm:block md:block" ><IoIosArrowForward /></span>
                                     </div>
                                 </li>)
