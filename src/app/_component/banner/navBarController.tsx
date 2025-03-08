@@ -2,25 +2,25 @@
 import { GlobalContext } from '@/app/util/globalcontext/globalecontext'
 import { useContext, useEffect } from 'react'
 
-function NavBarController() {
-const context=useContext(GlobalContext)
-if(!context){
-    throw new Error('NavBarController in banner : Non Disponible')
-}
-const {setToggelNav}=context
+function NavBarController({ children }: { children: React.ReactNode }) {
+    const context = useContext(GlobalContext)
+    if (!context) {
+        throw new Error('NavBarController in banner : Non Disponible')
+    }
+    const { setToggelNav } = context
 
-useEffect(()=>{
- const timer=setTimeout(()=>{
+    useEffect(() => {
+        const timer = setTimeout(() => {
 
-    setToggelNav(false)
- },1)   
+            setToggelNav(false)
+        }, 1)
 
- return ()=>clearTimeout(timer)
+        return () => clearTimeout(timer)
 
-},[setToggelNav])
+    }, [setToggelNav])
 
 
-  return null
+    return <>{children}</>
 }
 
 export default NavBarController

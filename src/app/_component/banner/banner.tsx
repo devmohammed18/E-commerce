@@ -44,8 +44,9 @@ async function Banner() {
 
 
   return (
+   
     <div className='min-h-screen box-border ' >
-      <NavBarController />
+     <NavBarController >
       <section className="h-full bg-slate-700  text-white">
         <div className="mx-auto max-w-screen-xl px-4 py-32 lg:flex lg:h-screen lg:items-center">
           <div className="mx-auto max-w-3xl text-center">
@@ -91,12 +92,14 @@ async function Banner() {
         {/* //    {/*************************************** cards The products **************************/}
 
      <BodyBanner products={products}/>
-       
+     
+     </NavBarController>
        
        
        
 
     </div>
+  
   )
 }
 
