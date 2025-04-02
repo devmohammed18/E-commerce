@@ -61,7 +61,7 @@ async function Products({params}:{params:typeParamsCatSub}) {
   return (
    
    <NavBarController>
-    <div className='w-full min-h-screen mt-[60px] mb-1 p-6 flex flex-wrap justify-around gap-y-2 items-center bg-white border border-solid border-black  '>
+    <div className='w-full min-h-screen mt-[80px] mb-1 p-6 flex flex-wrap justify-around gap-y-2 items-center bg-white border border-solid border-black  '>
         <div className=" w-full">
           <h1 className="w-max text-lg text-var(--primary-color) font-semibold py-2  border-b-2 border-solid border-black ">{`${subcategorie} for ${categorie}`} : </h1>
         </div>

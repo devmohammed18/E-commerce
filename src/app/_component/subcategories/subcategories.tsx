@@ -64,11 +64,11 @@ export default function SubCategories({ title_cat, subCategories,  }:
 
                 className={`sm:z-20 sm:fixed sm:top-20 sm:bottom-0 sm:w-full ${toggelSub ? 'sm:left-[500px]' : 'sm:left-[0px]'} 
                       md:z-20 md:fixed md:top-20 md:bottom-0 md:w-full ${toggelSub ? 'md:left-[1000px]' : 'md:left-[0px]'} 
-                      transition-all duration-300 ease-linear w-72 absolute top-full left-0 bg-[var(--primary-color)] 
+                      transition-all duration-300 ease-linear  w-72 mt-3 absolute top-full  left-0 bg-[var(--primary-color)] 
                       border-0 border-solid border-y-amber-500` }>
                 <div onClick={() => setToggelSub(true)}
                     className=" sm:py-4 sm:px-2 sm:mb-8 md:py-4 md:px-2 md:mb-8
-                          bg-slate-800 flex justify-center items-center border border-solid border-green-800">
+                          bg-slate-800 flex justify-center items-center border border-solid border-gray-400">
 
                     <span className="hidden sm:block sm:w-2/5 md:w-2/5  md:block"><IoIosArrowBack /></span>
 
@@ -88,7 +88,7 @@ export default function SubCategories({ title_cat, subCategories,  }:
                             item[0] === title_cat && item[1].map(({ title_sub }: typeSubCategorie, index: number) => {
                               
                               
-                                if(!title_sub) return null
+                              if(!title_sub) return null
                               return (<li key={index} className="sm:text-xl sm:opacity-80  sm:px-3  sm:py-2   w-full pl-4 py-2  capitalize hover:bg-slate-600">
                                     <div className="sm:w-full sm:border-b-2 sm:border-solid sm:py-2 sm:border-[var(--secondary-color)]
                                         md:w-full md:border-b-2 md:border-solid md:py-2 md:border-[var(--secondary-color)]  

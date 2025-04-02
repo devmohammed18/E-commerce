@@ -23,19 +23,6 @@ function MenuCart() {
     throw new Error('GlobalContext must be used within a GlobalContextProvider') }
     const {setShowCart,showCart}=context;
 
-// const incrementCart=()=>{
-//     dispatch(incrementCart({
-//         id:id,
-//         title_pro:title_pro,
-//         desc_pro:desc_pro,
-//         images:images,
-//         priceCart:priceCart,
-//         sizeCart:sizeCart,
-//         quantityCart:quantityCart,
-//     }))
-
-// }
-
 
   useEffect(()=>{
     dispatch(getTotalsQuantity())

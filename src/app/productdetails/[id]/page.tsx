@@ -44,7 +44,7 @@ async function  ProductDetalis({params}:{params:typeParams}) {
      //await delay(300)
   return (
     <Suspense fallback={<ProductsDetailsSkeleton />} >
-    <div className='  w-full min-h-screen flex-col  justify-center items-center py-1 space-y-1 mt-[85px] mb-1 bg-[var(--secondry-color)]'>
+    <div className='  w-full min-h-screen flex-col  justify-center items-center py-1 space-y-1 mt-[105px] mb-1 bg-[var(--secondry-color)]'>
      
        <BodyProductDetails productdetails={productdetails} />
  

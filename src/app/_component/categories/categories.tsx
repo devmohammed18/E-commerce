@@ -57,7 +57,7 @@ const functionShowList = (e: React.MouseEvent,filtercat:string) => {
                 className="sm:static sm:w-full sm:justify-start sm:py-2 sm:items-start sm:border-b sm:border-solid sm:border-b-[var(--secondary-color)] 
                            md:static md:w-full md:justify-start md:py-2 md:items-start md:border-b md:border-solid md:border-b-[var(--secondary-color)]  
                            
-                          relative py-7 box-border  flex justify-center items-center transition-all duration-500 ease-linear  ">          
+                          relative py-2 box-border  flex justify-center items-center transition-all duration-500 ease-linear  ">          
                  
                  <div className="w-full flex justify-between items-center"
                        onMouseMove={(e)=>{functionShowList(e,title_cat);setShowList(true);setToggelSub(false);setDisableFaShoppingCart(false)}} 
@@ -69,7 +69,7 @@ const functionShowList = (e: React.MouseEvent,filtercat:string) => {
                     </Link>
                     <span className="hidden sm:block md:block" ><IoIosArrowForward /></span> 
                  </div>
-              { titleCat===title_cat  && showList && !toggelSub && <SubCategories title_cat={title_cat} subCategories={subCategories} setShowList={setShowList} />}
+                { titleCat===title_cat  && showList && !toggelSub && <SubCategories title_cat={title_cat} subCategories={subCategories} setShowList={setShowList} />}
 
             {/* onMouseMove={(e)=>showList(e,title_cat) } onClick={(e)=>{showList(e,title_cat),setShow(true),console.log('title_cat:',title_cat) }}  */}
            {/*  style={{left:show?'0':'-600px'}}  ${filtercategories===title_cat}?auto:hidden  sm:static sm:w-full sm:translate-x-0 */}
