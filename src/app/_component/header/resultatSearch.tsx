@@ -101,6 +101,8 @@ function ResultatSearch({searchTrem,loading,setLoading}:{searchTrem:string,setLo
 
      },[products,searchTrem])
 
+     if(filterProducts.length===0)
+       return <div className="py-4 text-gray-600">No products found matching </div>;
     
     console.log('resultatSearch=====>',products)
   return (

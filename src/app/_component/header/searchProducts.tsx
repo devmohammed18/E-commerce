@@ -1,6 +1,6 @@
 'use client'
 import { useRouter ,usePathname, useSearchParams } from 'next/navigation';
-import React, { useState } from 'react'
+import React, { Suspense, useState } from 'react'
 import { ImSearch } from "react-icons/im";
 import ResultatSearch from './resultatSearch';
 
@@ -9,7 +9,7 @@ import ResultatSearch from './resultatSearch';
 //     setLoading:(value:boolean)=>void
 // }
 
-function SearchProducts() {
+function SearchProductsClient() {
 const searchParms=useSearchParams()
 const pathname=usePathname()
 const router=useRouter()
@@ -32,6 +32,9 @@ const handleSearch=(searchTerm:string)=>{
 
 }
 
+
+
+
   return (
     <div className="sm:flex sm:items-start sm:justify-end relative w-full border-0 border-solid border-red-800 ">
         {/* ********************************** input Search ********************************** */}
@@ -50,4 +53,26 @@ const handleSearch=(searchTerm:string)=>{
   )
 }
 
-export default SearchProducts
+
+// Create a wrapper component that uses Suspense
+function SearchProducts() {
+  return (
+    <Suspense fallback={
+      <div className="relative w-full">
+        <div className="sm:hidden w-full h-10 rounded-full bg-gray-100 animate-pulse"></div>
+        <span className="sm:static sm:text-xl sm:font-extrabold absolute top-[12px] right-4 pr-2">
+          <ImSearch />
+        </span>
+      </div>
+    }>
+      <SearchProductsClient />
+    </Suspense>
+  );
+}
+
+export default SearchProducts;
+
+
+
+
+//export default SearchProducts
