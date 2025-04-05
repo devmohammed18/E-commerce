@@ -48,12 +48,12 @@ useEffect(()=>{
    // <ToggelHeaderContext.Provider value={{showCart,setShowCart,titleCat,setTitleCat,toggelNav,setToggelNav,toggelSub,setToggelSub}} >
     <div className="w-full border-0 border-solid border-green-500 ">
         
-         <div  className="sm:h-[80px] md:h-[80px]  sm:justify-center md:justify-center z-20 w-full h-[110px] fixedHeader flex flex-col items-start justify-start border-0 border-red-800 border-solid bg-[var(--primary-color)] text-[var(--secondary-color)] cursor-pointer" 
+         <div  className="sm:h-[110px] md:h-[110px]  sm:justify-start md:justify-center z-20 w-full h-[110px] fixedHeader flex flex-col items-start justify-start border-0 border-red-800 border-solid bg-[var(--primary-color)] text-[var(--secondary-color)] cursor-pointer" 
                onMouseMove={()=>{console.log("-------------------->",titleCat)}} >
               <div className="w-11/12 py-2 mx-auto flex justify-between items-center border-0 border-yellow-400 border-solid ">
                     
                     {/********  menu borger -----  Logo  -----   Search Barre ***** */}
-                    <div  className="w-10/12 sm:gap-5 flex justify-between items-center  gap-14 border-0 border-solid border-red-800 cursor-pointer" >
+                    <div  className="w-10/12 gap-5 flex justify-start items-center  border-0 border-solid border-red-800 cursor-pointer" >
                         {/****************************** Menu Borger *********************************** */}
                         <button onClick={()=>{setToggelNav(true);setToggelSub(true);setShowCart(false);setDisableFaShoppingCart(false)}} 
                             className="hidden sm:block md:block cursor-pointer text-2xl" >
@@ -64,8 +64,7 @@ useEffect(()=>{
                         <div className="sm:text-md text-xl text-nowrap">
                           <Link href="/" >E-comerce</Link> 
                         </div>
-                        {/************************* Search Barre *******************/}
-                         <SearchProducts />
+                     
                    
                     </div>
 
@@ -99,27 +98,25 @@ useEffect(()=>{
                         
 
                         {/* <ClerkLoaded> */}
-                          {user?
-                          
-                              <UserButton />
-                          
-                          :
-                          <Link href='/sign-in'
-                          className="sm:text-md w-10 h-10 flex justify-center items-center text-2xl bg-transparent rounded-full hover:bg-slate-700 " >
-                              
-                          <IoMdContact />
-                          
-                      
-                          </Link> }
-                        {/* </ClerkLoaded> */}
-                
+                          {user?(<UserButton />) 
+                          :(<Link href='/sign-in'
+                                className="sm:text-md w-10 h-10 flex justify-center items-center text-2xl bg-transparent rounded-full hover:bg-slate-700 " >
+                                <IoMdContact />
+                          </Link>) 
+                          }
+                        {/* </ClerkLoaded> */}   
                     </div>
               </div>
              
               {/******************************* NavBar ********************** */}
-              <div className="sm:border-t-0 md:border-t-0 w-11/12 flex items-start border-t-2 mx-auto border-solid border-gray-400 ">
-                  <NavBar categories={categories} subCategories={subCategories} />
+              <div className="sm:border-t-0 md:border-t-0 w-11/12 flex items-start justify-between border-t-2 mx-auto border-solid border-gray-400 ">
                   
+                  <NavBar categories={categories} subCategories={subCategories} />
+                  <div className={` sm:top-12 w-4/5  md:w-full sm:w-full `}   >
+                    
+                    <SearchProducts />
+                </div>
+                 
               </div>
          </div>
          

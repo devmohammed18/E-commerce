@@ -61,6 +61,8 @@ export interface typeGlobalContext{
     toggelNav:boolean,
     setToggelNav:Dispatch<SetStateAction<boolean>>
     showCart:boolean,
+    showResutatSearch:string ,
+    setShowResultatSearch:Dispatch<SetStateAction<string>>,
     setShowCart:Dispatch<SetStateAction<boolean>>
     disableFaShoppingCart:boolean,
     setDisableFaShoppingCart:Dispatch<SetStateAction<boolean>>
@@ -68,6 +70,7 @@ export interface typeGlobalContext{
     setDisCounterQuantite:Dispatch<SetStateAction<boolean>>
     isShowProducts:boolean,
     setIsShowProducts:Dispatch<SetStateAction<boolean>>
+
 }
 /************* tye the button increment and decrement quantity the cart******** */
 export interface typeBtnCounterQuantity{
