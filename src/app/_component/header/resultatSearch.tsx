@@ -122,7 +122,8 @@ function ResultatSearch({searchTrem,loading,setLoading}:{searchTrem:string,setLo
       return(
         <div key={index} className='border-0 border-solid border-red  text-red-600 box-border'>
             
-            <Link href={`/productdetails/${id}?imageIndex=${CurrentSelectIndex}`}  className=" sm:w-full block rounded-lg p-4 shadow-sm shadow-gray-100 border-0 hover:shadow-md hover:border hover:border-solid hover:border-gray-400 hover:rounded-lg ">
+            <Link href={`/productdetails/${id}?imageIndex=${CurrentSelectIndex}`}  
+                  className="w-36  block rounded-lg p-2 shadow-sm shadow-gray-100 border-2 hover:shadow-md hover:border hover:border-solid hover:border-gray-400 hover:rounded-lg ">
               {/* ********************   big image Cart Product ******************** */}
               <div className='relative w-full h-40 box-border' onClick={()=>{setShowResultatSearch('')}} > 
               
@@ -132,7 +133,7 @@ function ResultatSearch({searchTrem,loading,setLoading}:{searchTrem:string,setLo
                       (<div><Image
                               alt="image"
                               src={images[CurrentSelectIndex].url_image[0].url} width={100} height={100}
-                              className=" w-full rounded-md object-cover"
+                              className=" w-full h-40  rounded-md object-cover"
                               />
                         </div>)
   
@@ -175,7 +176,7 @@ function ResultatSearch({searchTrem,loading,setLoading}:{searchTrem:string,setLo
                  
                   <div>
                           <dt className="sr-only">title de produit</dt>
-                          <dd className="font-medium text-[10px] text-justify">{title_pro}</dd>
+                          <dd className="font-medium text-[10px] text-justify line-clamp-1 ">{title_pro}</dd>
                       </div>
                   <dl>
                       <div className="flex items-start">

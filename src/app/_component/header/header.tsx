@@ -109,7 +109,7 @@ useEffect(()=>{
               </div>
              
               {/******************************* NavBar ********************** */}
-              <div className="sm:border-t-0 md:border-t-0 w-11/12 flex items-start justify-between border-t-2 mx-auto border-solid border-gray-400 ">
+              <div className="sm:border-t-0 md:border-t-0 w-11/12 flex items-center justify-between py-1 border-t-2 mx-auto border-solid border-gray-400 ">
                   
                   <NavBar categories={categories} subCategories={subCategories} />
                   <div className={` sm:top-12 w-4/5  md:w-full sm:w-full `}   >
